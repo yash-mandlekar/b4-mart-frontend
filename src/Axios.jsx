@@ -1,7 +1,7 @@
 import axios from "axios";
 const Axios = axios.create({
   baseURL: process.env.NODE_ENV === "production" 
-    ? `https://whale-app-5b958.ondigitalocean.app/api` 
+    ? `https://seashell-app-evjm9.ondigitalocean.app/api` 
     : `http://localhost:4000/api`,
   headers: {
     "Content-Type": "application/json",
