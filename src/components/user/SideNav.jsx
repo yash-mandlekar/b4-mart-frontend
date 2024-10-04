@@ -9,7 +9,6 @@ import cart from "../../assets/cart.svg";
 import location from "../../assets/location.svg";
 import Logout from "../../assets/logout.svg";
 import Logo from "../common/Logo";
-import Axios from "../../Axios";
 import { asynclogout } from "../../store/userActions";
 import { useDispatch } from "react-redux";
 

@@ -4,7 +4,6 @@ import Search from "./Search";
 import SideNav from "./SideNav";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import TopNav from "./TopNav";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,7 +16,6 @@ const Home = () => {
   }, []);
   return (
     <div className="main">
-      <TopNav />
       <Search />
       <div className="content-area">
         <Outlet />
