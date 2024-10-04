@@ -19,7 +19,6 @@ const App = () => {
   const notify = (msg) => toast(msg ?? "Something went wrong");
   const { isLoggedIn, loading, error } = useSelector((state) => state.user);
   const Dispatch = useDispatch();
-console.log(loading);
 
   useEffect(() => {
     Dispatch(asyncloaduser());

@@ -23,11 +23,8 @@ const LogIn = () => {
     try {
       if (username.length < 3) return notify("Enter a vaild username");
       if (contact.length != 10) return notify("Enter a vaild number");
-      window.alert("line 27");
       const { data } = await Axios.post("/login", { username, contact });
-      window.alert("line 29");
       if (data.message == "OTP send succesfully") {
-        window.alert("line 31");
         notify(data.user.otp);
         setpage(1);
       }
