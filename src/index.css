@@ -9,12 +9,15 @@ a {
   color: inherit;
 }
 
+.flex {
+  display: flex;
+}
 /* Loader */
 /* From Uiverse.io by PriyanshuGupta28 */
 .spinner {
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   position: absolute;
   width: 9px;
   height: 9px;

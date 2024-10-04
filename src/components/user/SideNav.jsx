@@ -1,26 +1,26 @@
 import React from "react";
-import "../Css/Home.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import Vector from "../assets/Vector.svg";
-import Profile from "../assets/profile.svg";
-import Notification from "../assets/notification.svg";
-import search from "../assets/search.svg";
-import cart from "../assets/cart.svg";
-import location from "../assets/location.svg";
-import Logout from "../assets/logout.svg";
-import Logo from "./Logo";
-import Axios from "../Axios";
+import "../../Css/Home.css";
+import { NavLink } from "react-router-dom";
+import Vector from "../../assets/Vector.svg";
+import Profile from "../../assets/profile.svg";
+import Notification from "../../assets/notification.svg";
+import search from "../../assets/search.svg";
+import cart from "../../assets/cart.svg";
+import location from "../../assets/location.svg";
+import Logout from "../../assets/logout.svg";
+import Logo from "../common/Logo";
+import Axios from "../../Axios";
+import { asynclogout } from "../../store/userActions";
+import { useDispatch } from "react-redux";
 
 const SideNav = () => {
-  const navigate = useNavigate();
+  const Dispatch = useDispatch();
   const handleLogout = async () => {
     if (window.confirm("Are you really want to logout?")) {
-      const { data } = await Axios.get("/logout");
-      console.log(data);
-      
-      if (data.success) {
-        navigate("/");
-      }
+      Dispatch(asynclogout());
+      // if (data.success) {
+      //   navigate("/");
+      // }
     }
   };
   return (

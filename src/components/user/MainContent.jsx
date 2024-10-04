@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Advertisement from "./Advertisement";
 import Shops from "./Shops";
-import { link } from "framer-motion/client";
-import "../Css/Home.css";
-import Axios from "../Axios";
+import "../../Css/Home.css";
+import Axios from "../../Axios";
 import { useNavigate } from "react-router-dom";
 const MainContent = () => {
   const navigate = useNavigate();
@@ -12,14 +11,14 @@ const MainContent = () => {
       url: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-07/pharmacy-WEB.jpg",
       link: "",
     },
-    {
-      url: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-07/Pet-Care_WEB.jpg",
-      link: "",
-    },
-    {
-      url: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-03/babycare-WEB.jpg",
-      link: "",
-    },
+    // {
+    //   url: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-07/Pet-Care_WEB.jpg",
+    //   link: "",
+    // },
+    // {
+    //   url: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-03/babycare-WEB.jpg",
+    //   link: "",
+    // },
   ]);
   const [shops, setShops] = useState([
     {
@@ -84,7 +83,7 @@ const MainContent = () => {
     },
   ]);
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
   const fetchData = async () => {
     try {

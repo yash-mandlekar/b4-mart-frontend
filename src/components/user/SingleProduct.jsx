@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../Css/item.css";
+import "../../Css/item.css";
 const SingleProduct = () => {
   const [singleProduct, setSingleProduct] = useState({
     img: "https://5.imimg.com/data5/SELLER/Default/2021/9/SZ/QF/KE/99188395/ice-cream-packaging-boxes-3-1524677180-8.jpg",

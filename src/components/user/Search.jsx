@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/Home.css";
+import "../../Css/Home.css";
 const Search = () => {
   return (
     <nav className="searchBox">

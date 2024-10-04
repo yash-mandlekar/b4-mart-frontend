@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SideNav from "./SideNav";
-import "../Css/ShoppingCart.css";
-import { Link } from "react-router-dom";
+import "../../Css/ShoppingCart.css";
 import CartBox from "./CartBox";
 
 const Cart = () => {

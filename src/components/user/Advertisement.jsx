@@ -1,5 +1,4 @@
 import React from "react";
-import "../Css/Adds.css";
 import { easeInOut, motion } from "framer-motion";
 const Advertisement = ({ data }) => {
 

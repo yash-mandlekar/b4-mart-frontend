@@ -1,29 +1,53 @@
-import React from "react";
-import LogIn from "./components/LogIn";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import SignUp from "./components/SignUp";
-import Home from "./components/Home";
-import MainContent from "./components/MainContent";
-import ShopProduct from "./components/ShopProduct";
-import SingleProduct from "./components/SingleProduct";
-import Cart from "./components/Cart";
-import AdminLogin from "./components/AdminLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncloaduser } from "./store/userActions";
+import { toast } from "react-toastify";
+import Home from "./components/user/Home";
+import ShopProduct from "./components/user/ShopProduct";
+import SingleProduct from "./components/user/SingleProduct";
+import MainContent from "./components/user/MainContent";
+import LogIn from "./components/user/LogIn";
+import SignUp from "./components/user/SignUp";
+import Cart from "./components/user/Cart";
+import AdminLogin from "./components/admin/AdminLogin";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import Loader from "./components/common/Loader";
 
 const App = () => {
+
+  const notify = (msg) => toast(msg ?? "Something went wrong");
+  const { isLoggedIn, loading, error } = useSelector((state) => state.user);
+  const Dispatch = useDispatch();
+console.log(loading);
+
+  useEffect(() => {
+    Dispatch(asyncloaduser());
+  }, []);
+
+  useEffect(() => {
+    if (error) notify(error);
+  }, [error]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<LogIn />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="admin" element={<AdminLogin />} />
-        <Route path="/home" element={<Home />}>
-          <Route index element={<MainContent />} />
-          <Route path="shopProducts" element={<ShopProduct />} />
-          <Route path="singleProduct" element={<SingleProduct />} />
-        </Route>
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<LogIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/home" element={<Home />}>
+        <Route index element={<MainContent />} />
+        <Route path="shopProducts" element={<ShopProduct />} />
+        <Route path="singleProduct" element={<SingleProduct />} />
+      </Route>
+      <Route path="/cart" element={<Cart />} />
+
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/adminDashboard" element={<AdminDashboard />} />
+    </Routes>
   );
 };
 

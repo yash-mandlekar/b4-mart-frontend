@@ -1,78 +1,88 @@
 import React, { useEffect, useState } from "react";
-import "../Css/Login.css";
+import "../../Css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import Axios from "../Axios";
-import Loader from "./MiniComponent/Loader";
+import Axios from "../../Axios";
+import { notify } from "../common/Toast";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../common/Loader";
+import { asyncloaduser } from "../../store/userActions";
+
 const LogIn = () => {
   const navigate = useNavigate();
+  const Dispatch = useDispatch();
+  const { loading, isLoggedIn } = useSelector((state) => state.user);
   const [page, setpage] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({
+  const [formdata, setFormdata] = useState({
     username: "",
     contact: "",
     otp: "",
   });
-  const { username, contact, otp } = user;
+  const { username, contact, otp } = formdata;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (username.length < 3) return alert("enter a vaild username");
-      if (contact.length < 10) return alert("enter a vaild number");
+      if (username.length < 3) return notify("Enter a vaild username");
+      if (contact.length != 10) return notify("Enter a vaild number");
+      window.alert("line 27");
       const { data } = await Axios.post("/login", { username, contact });
+      window.alert("line 29");
       if (data.message == "OTP send succesfully") {
-        window.alert(data.user.otp);
+        window.alert("line 31");
+        notify(data.user.otp);
         setpage(1);
       }
     } catch (err) {
+      alert(err)
       console.log(err);
     }
   };
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
+    if (otp.length != 4) return notify("Enter a vaild OTP");
     const { data } = await Axios.post("/otp", { contact, otp });
-    console.log(data);
-    
+    Dispatch(asyncloaduser());
+
     if (data.success) {
       navigate("/home");
+    } else {
+      notify(data.message);
     }
   };
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setFormdata({ ...formdata, [e.target.name]: e.target.value });
+  };
+  const hack = async () => {
+    const { data } = await Axios.post("/login", {
+      username: "yash",
+      contact: "1234567890",
+    });
+    if (data.message == "OTP send succesfully") {
+      setFormdata({
+        username: "yash",
+        contact: "1234567890",
+        otp: data.user.otp,
+      });
+      setpage(1);
+    }
   };
 
   useEffect(() => {
-    fetchUser();
-  }, []);
-  const fetchUser = async () => {
-    try {
-      setLoading(true);
-      const data = await Axios.get("/me");
-      console.log(data);
-
-      if (data?.data?.success) {
-        setTimeout(() => {
-          setLoading(false);
-          navigate("/home");
-        }, 2000);
-      }
-    } catch (err) {
-      setTimeout(() => {
-        setLoading(false);
-        console.log(err?.response?.data?.message);
-      }, 2000);
+    if (isLoggedIn) {
+      navigate("/home");
     }
-  };
-  if (loading) {
-    return <Loader />;
-  }
-  return (
+  }, []);
+  return loading ? (
+    <Loader />
+  ) : (
     <>
       <div className="base">
         <div className="text">
           <h1>Welcome Back.!</h1>
-          <Link to="/home">
-            <div className="skip">Skip the lag?</div>
-          </Link>
+          <div>
+            <div onClick={hack} className="skip">
+              Skip the lag?
+            </div>
+          </div>
         </div>
         <div className="loginForm">
           <div className="box"></div>

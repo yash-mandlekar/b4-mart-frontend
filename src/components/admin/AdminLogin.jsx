@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/Login.css";
+import "../../Css/Login.css";
 const AdminLogin = () => {
   return (
     <div className="adminpage" style={{ backgroundColor: "#e8e8e8" }}>

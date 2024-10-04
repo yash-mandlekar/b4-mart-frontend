@@ -9,10 +9,19 @@ body {
   width: 100%;
 }
 .main {
+  min-height: 100vh;
+  height: fit-content;
   width: 100vw;
   background-color: #f5f4f4;
-  display: flex;
+  /* display: flex; */
 }
+
+/* Top Nav Starting */
+.top-nav {
+  display: flex;
+  position: absolute;
+}
+
 /* Search box startig */
 .searchBox {
   width: 90%;
@@ -27,7 +36,7 @@ body {
 .category {
   width: 90%;
   height: fit-content;
-  padding: 6vmax 4vmax;
+  padding: 10vh 4vmax;
   overflow-y: scroll;
   /* background-color: red; */
   position: relative;
@@ -117,10 +126,10 @@ nav {
   flex-direction: column;
   justify-content: space-between;
 }
-.sideNavBase img{
+.sideNavBase img {
   width: 1.5vmax;
 }
-.sideNavBase a{
+.sideNavBase a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,10 +144,10 @@ nav {
   /* background-color: rebeccapurple; */
   gap: 1vmax;
 }
-.navTop img{
+.navTop img {
   height: 1.5vmax;
 }
-.navTop a{
+.navTop a {
   padding: 1vmax;
 }
 .active > img {
@@ -151,7 +160,7 @@ nav {
   box-shadow: 0px 4px 7.2px 1px #00000086;
 }
 .logout {
-  padding: .6vmax .5vmax;
+  padding: 0.6vmax 0.5vmax;
   border: none;
   display: flex;
   align-items: center;
@@ -160,7 +169,6 @@ nav {
   background-color: black;
   cursor: pointer;
 }
-
 
 .navBottom {
   width: 100%;
@@ -183,3 +191,98 @@ nav {
   object-fit: cover;
 }
 /* Side Nav Ending */
+
+/* Ads Starting */
+
+.ad-base {
+  width: 100%;
+  padding: 1.5vmax 0vmax;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3vmax;
+}
+.boxex {
+  width: 24vmax;
+  cursor: pointer;
+}
+
+.boxex > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.layout {
+  background-color: red;
+}
+/* Ads Ending */
+
+/* Shops Starting */
+.shopBase {
+  width: 100%;
+  padding-left: 0vmax;
+  height: fit-content;
+}
+.container {
+  width: 100%;
+  margin-top: 1vmax;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2vw;
+}
+.shoperBox {
+  width: 12vmax;
+  height: 14vmax;
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+  border-radius: 12px;
+}
+.shoperBox:hover .top > img {
+  scale: 1.1;
+}
+.top {
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+}
+.top > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+}
+.name {
+  width: 100%;
+  height: 20%;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Shops ending */
+
+/* responsive home */
+@media screen and (max-width: 768px) {
+  .sideNav {
+    display: none;
+  }
+  .searchBox {
+    width: 100%;
+  }
+  .category {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 430px) {
+  .boxex {
+    width: unset;
+  }
+  .shoperBox {
+    width: 47%;
+    height: 24vh;
+  }
+}
