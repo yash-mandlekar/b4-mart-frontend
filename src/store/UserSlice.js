@@ -34,57 +34,11 @@ export const userSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
-    loadblogs: (state, action) => {
-      state.blogs = action.payload;
-      state.loading = false;
-    },
-    loadsingleuser: (state, action) => {
-      state.singleuser = action.payload;
-      state.loading = false;
-    },
-    loadupdateblog: (state, action) => {
-      state.updateblog = action.payload;
-      state.loading = false;
-    },
-    updatelike: (state, action) => {
-      if (action.payload.single) {
-        state.singleblog.likes = action.payload.likes;
-      } else {
-        state.singleuser.stories = state.singleuser.stories.map((blog) => {
-          if (blog._id === action.payload.id) {
-            return { ...blog, likes: action.payload.likes };
-          } else {
-            return blog;
-          }
-        });
-      }
-      state.blogloading = false;
-    },
-    loadsingleblogs: (state, action) => {
-      state.singleblog = action.payload;
-      state.blogloading = false;
-    },
-    loadusers: (state, action) => {
-      state.users = action.payload;
-      state.loading = false;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  loaduser,
-  errors,
-  logout,
-  loadblogs,
-  loadsingleuser,
-  setloading,
-  loadupdateblog,
-  updatelike,
-  setblogloading,
-  loadsingleblogs,
-  setloadingfalse,
-  loadusers,
-} = userSlice.actions;
+export const { setloading, loaduser, errors, setloadingfalse, logout } =
+  userSlice.actions;
 
 export default userSlice.reducer;
