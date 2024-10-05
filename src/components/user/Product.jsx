@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../Css/product.css";
 import { Link } from "react-router-dom";
 const Product = ({ data }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  
+  const increaseQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  
+  const decreaseQuantity = () => {
+    setQuantity(prev => (prev > 1 ? prev - 1 : 0));
+  };
+  
   return (
     <>
     <Link to={data.link}>
@@ -17,20 +29,52 @@ const Product = ({ data }) => {
           <div className="overlap">
             <div className="price "> ₹{data.price}</div>
             <div className="add ">
-              <button className="CartBtn">
-                <span className="IconContainer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="1em"
-                    viewBox="0 0 576 512"
-                    fill="rgb(17, 17, 17)"
-                    className="cart"
-                  >
-                    <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
-                  </svg>
-                </span>
-                <p className="textAdd">Add </p>
-              </button>
+            <button type="button" className="button">
+      {quantity === 0 ? (
+        
+        <span className="button__text" onClick={increaseQuantity}>
+          Add Item
+        </span>
+      ) : (
+        
+        <div className="button__content">
+          <span className="button__icon" onClick={decreaseQuantity}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              stroke="currentColor"
+              height="24"
+              fill="none"
+              className="svg"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+          <span className="button__text">{quantity}</span>
+          <span className="button__icon" onClick={increaseQuantity}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              stroke="currentColor"
+              height="24"
+              fill="none"
+              className="svg"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+        </div>
+      )}
+    </button>
             </div>
           </div>
         </div>

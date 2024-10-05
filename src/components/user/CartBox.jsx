@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const CartBox = ({data}) => {
+  const [quantity, setQuantity] = useState(1);
+
+  
+  const increaseQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  
+  const decreaseQuantity = () => {
+    setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+  };
   return (
   
     <div>
@@ -26,6 +37,51 @@ const CartBox = ({data}) => {
                 be provided, if applicable.
               </p>
               <Link>Delete this item</Link>
+              <button type="button2" className="button">
+      {
+        
+        
+      
+        
+        <div className="button__content">
+          <span className="button__icon" onClick={decreaseQuantity}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              stroke="currentColor"
+              height="24"
+              fill="none"
+              className="svg"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+          <span className="button__text tulu">{quantity}</span>
+          <span className="button__icon" onClick={increaseQuantity}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              stroke="currentColor"
+              height="24"
+              fill="none"
+              className="svg"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+        </div>
+    
+      }
+    </button>
             </div>
             <div className="productPrice">₹{data.price}</div>
           </div>

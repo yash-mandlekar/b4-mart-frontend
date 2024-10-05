@@ -13,6 +13,9 @@ html,body{
   padding: 3vmax 4vmax;
   background-color: #f5f4f4;
 }
+.button{
+  color: white;
+}
 .longBox{
   width: 85vw;
   height: fit-content;
@@ -52,8 +55,9 @@ html,body{
 font-weight: 600;
 }
 .shoopingDetails span{
-  color: green;
+  color: white;
 }
+
 .longBox h1{
   font-weight: 500;
 }
@@ -87,7 +91,7 @@ display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.button {
+.button2 {
   position: relative;
   width: 150px;
   /* height: 40px; */
@@ -102,4 +106,71 @@ display: flex;
   justify-content: center;
   border: 1px solid #34974d;
   background-color: #3aa856;
+}
+
+.button2 .button__text {
+  color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.button__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
+}
+
+.button:hover {
+  background: #34974d;
+}
+
+.button:active .button__icon {
+  background-color: #2e8644;
+}
+
+.button:active {
+  border: 1px solid #2e8644;
+}
+
+@media screen and (max-width: 430px) {
+  .itemsList{
+ width: unset;
+  }
+  .shoppingItemImg{
+    width: 100%;
+   
+  }
+  .shoopingDetails{
+    width: 100%;
+    /* display: flex;
+    flex-direction: column; */
+    gap: 1vmax;
+  }
+  .shoopingDetails p{
+    display: none;
+  }
+  .shoppingCart{
+   padding: 0 0;
+  }
+  .longBox{
+    width: 100vw;
+    height: fit-content;
+    padding: 1vmax;
+    background-color: rgb(255, 255, 255);
+  }
 }

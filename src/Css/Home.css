@@ -35,8 +35,8 @@ body {
   width: 20px;
 }
 .top-nav .top-nav-profile-cnt {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   border-radius: 100px;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@ body {
 .icon {
   position: absolute;
   /* width: var(--size-button); */
-  height: 47px;
+  height: 48px;
   color: white;
   top: 0%;
   left: 0%;

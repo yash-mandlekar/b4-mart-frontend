@@ -9,10 +9,16 @@ html,body{
 }
 .product{
   width: 90vw;
-  height: 100vh;
+  height: fit-content;
   padding-top: 8vmax;
   padding-left: 3vmax;
-  
+ 
+}
+.productlap{
+width: 100vw;
+display: flex;
+flex-wrap: wrap;
+
 }
 .productBox{
   width: 15vmax;
@@ -23,12 +29,14 @@ html,body{
   display: flex;
   flex-direction: column;
   margin-top: 1vmax;
+  margin-left: 1vmax;
 padding: .5vmax;
 }
 .image{
   width: 100%;
   /* height: 60%; */
-  
+  overflow: hidden;
+  border-radius: 8px;
 }
 .image>img{
   width: 100%;
@@ -81,68 +89,67 @@ font-weight: 500;
   justify-content: center;
   align-items: center;
 }
-/* From Uiverse.io by vinodjangid07 */ 
-.CartBtn {
-  padding: 12px 14px;
-  width: 110px;
-  /* height: 40px; */
-  border-radius: 12px;
-  border: none;
-  background-color: rgb(255, 208, 0);
+.button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  border-radius: 7px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+}
+
+.button__text {
+  color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.button__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.button__icon {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition-duration: .5s;
-  overflow: hidden;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
-  position: relative;
 }
 
-.IconContainer {
-  position: absolute;
-  left: -50px;
-  width: 30px;
-  /* height: 30px; */
-  background-color: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 2;
-  transition-duration: .5s;
+.svg {
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
 }
 
-.icon {
-  border-radius: 1px;
+.button:hover {
+  background: #34974d;
 }
 
-.textAdd {
-  /* height: 100%; */
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(17, 17, 17);
-  z-index: 1;
-  transition-duration: .5s;
-  font-size: 1.04em;
-  font-weight: 600;
+.button:active .button__icon {
+  background-color: #2e8644;
 }
 
-.CartBtn:hover .IconContainer {
-  transform: translateX(58px);
-  border-radius: 40px;
-  transition-duration: .5s;
+.button:active {
+  border: 1px solid #2e8644;
 }
-
-.CartBtn:hover .text {
-  transform: translate(10px,0px);
-  transition-duration: .5s;
-}
-
-.CartBtn:active {
-  transform: scale(0.95);
-  transition-duration: .5s;
+@media screen and (max-width: 430px) {
+  .product{
+    width: 100vw;
+    padding-left: 0vmax;
+    
+  }
+  .productBox{
+    width: 22vmax;
+    overflow: hidden;
+  }
+ 
 }

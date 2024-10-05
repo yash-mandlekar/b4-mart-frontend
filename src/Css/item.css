@@ -113,3 +113,29 @@ object-fit: cover;
 .button:active {
   border: 1px solid #2e8644;
 }
+
+@media screen and (max-width: 430px) {
+  .item{
+    width: 100vw;
+ padding-left: 0;
+  }
+  .itemContainer{
+   display: flex;
+   flex-direction: column;
+    
+  }
+  .itemPhoto{
+    width: 100%;
+    height: fit-content;
+    border-right: 1px solid rgba(57, 57, 57, 0.215);
+  }
+  .priceOverlap{
+    width: 100%;
+   
+  }
+  .itemInfo{
+    width: 100%;
+    
+  
+  }
+}

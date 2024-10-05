@@ -26,7 +26,7 @@ const Search = () => {
           <NavLink to="/notification" activeclassname="active">
             <img className="top-nav-img" src={Notification} alt="" />
           </NavLink>
-          <NavLink to="/cart" activeclassname="active">
+          <NavLink to="cart" activeclassname="active">
             <img className="top-nav-img" src={cart} alt="" />
           </NavLink>
           <div className="top-nav-profile-cnt">

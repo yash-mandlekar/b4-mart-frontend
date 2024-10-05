@@ -13,9 +13,9 @@ import Cart from "./components/user/Cart";
 import AdminLogin from "./components/admin/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import Loader from "./components/common/Loader";
+import AdminShops from "./components/admin/AdminShops";
 
 const App = () => {
-
   const notify = (msg) => toast(msg ?? "Something went wrong");
   const { isLoggedIn, loading, error } = useSelector((state) => state.user);
   const Dispatch = useDispatch();
@@ -32,7 +32,6 @@ const App = () => {
     return <Loader />;
   }
 
-
   return (
     <Routes>
       <Route path="/" element={<LogIn />} />
@@ -41,11 +40,12 @@ const App = () => {
         <Route index element={<MainContent />} />
         <Route path="shopProducts" element={<ShopProduct />} />
         <Route path="singleProduct" element={<SingleProduct />} />
+        <Route path="cart" element={<Cart />} />
       </Route>
-      <Route path="/cart" element={<Cart />} />
 
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/adminDashboard" element={<AdminDashboard />} />
+      <Route path="/adminShops" element={<AdminShops />} />
     </Routes>
   );
 };

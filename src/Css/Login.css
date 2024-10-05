@@ -71,8 +71,6 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-box-shadow: 15px 14px 48px -12px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 15px 14px 48px -12px rgba(0, 0, 0, 0.75);
   box-shadow: 15px 14px 48px -12px rgba(0, 0, 0, 0.75);
   transform: translate(-50%, -50%);
 }
@@ -157,8 +155,8 @@ body {
   cursor: pointer;
   transition: cubic-bezier(0.19, 1, 0.22, 1) 2s;
 }
-.sign:active{ 
-  transform: scale(.9);
+.sign:active {
+  transform: scale(0.9);
 }
 
 .social-message {
@@ -258,22 +256,25 @@ input[type="number"]::-webkit-inner-spin-button {
   .text {
     display: none;
   }
-  .loginForm{
-    width: unset;
+  .loginForm {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 420px) {
+  .loginBox {
+    width: 95%;
   }
 }
 
-
-
- /* admin login css */
- /* From Uiverse.io by VitorBaraoDias */ 
- .adminpage{
+/* admin login css */
+/* From Uiverse.io by VitorBaraoDias */
+.adminpage {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
- }
+}
 .form-control {
   margin: 20px;
   background-color: #ffffff;

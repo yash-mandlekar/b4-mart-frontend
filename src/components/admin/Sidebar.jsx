@@ -27,13 +27,13 @@ export default function Sidebar() {
 
         <ul className="sidebar-menu">
           <li>
-            <a href="#">
+            <a href="/adminDashboard">
             <MdOutlineDashboard />
             Dashboard
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/adminShops">
             <GoHome /> Shops
             </a>
           </li>

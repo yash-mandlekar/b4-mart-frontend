@@ -24,9 +24,7 @@ const SideNav = () => {
   };
   return (
     <div className="sideNav">
-      <NavLink to="/" activeclassname="active">
-        <Logo />
-      </NavLink>
+      <Logo />
       <div className="sideNavBase">
         <div className="navTop">
           <NavLink to="/home" activeclassname="active">

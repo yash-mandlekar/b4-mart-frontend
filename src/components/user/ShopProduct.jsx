@@ -10,14 +10,31 @@ const ShopProduct = () => {
       price: 250,
       link:"/home/singleProduct"
     },
+    {
+      img: "https://5.imimg.com/data5/SELLER/Default/2021/9/SZ/QF/KE/99188395/ice-cream-packaging-boxes-3-1524677180-8.jpg",
+      productName: "Vanilla Icecream",
+      quantity: "500g",
+      price: 250,
+      link:"/home/singleProduct"
+    },
+    {
+      img: "https://5.imimg.com/data5/SELLER/Default/2021/9/SZ/QF/KE/99188395/ice-cream-packaging-boxes-3-1524677180-8.jpg",
+      productName: "Vanilla Icecream",
+      quantity: "500g",
+      price: 250,
+      link:"/home/singleProduct"
+    },
   ]);
   
   return (
     <div className="product">
       <h1>Products</h1>
+      <div className="productlap">
+
       {product.map((e, i) => (
         <Product data={e} key={i} />
       ))}
+      </div>
       
     </div>
   );
