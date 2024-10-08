@@ -4,31 +4,56 @@ import {
   logout,
   setloadingfalse,
   setloading,
+  setshops,
+  setpageloading,
+  setpageloadingfalse,
 } from "./UserSlice";
 import Axios from "../Axios";
 
 export const asyncloaduser = () => async (dispatch) => {
   try {
-    dispatch(setloading());
+    dispatch(setpageloading());
     const { data } = await Axios.get("/me");
     if (data.success) {
       dispatch(loaduser(data.user));
     }
-    dispatch(setloadingfalse());
+    dispatch(setpageloadingfalse());
   } catch (err) {
-    dispatch(setloadingfalse());
+    dispatch(setpageloadingfalse());
     dispatch(errors(err?.response?.data?.message));
   }
 };
 
 export const asynclogout = () => async (dispatch) => {
   try {
-    dispatch(setloading());
+    dispatch(setpageloading());
     await Axios.get("/logout");
     dispatch(logout());
-    dispatch(setloadingfalse());
+    dispatch(setpageloadingfalse());
   } catch (err) {
     dispatch(errors(err.response.data.message));
   }
 };
 
+export const asyncadminlogin = (formdata) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.post("/admin/login", formdata);
+    if (data.success) dispatch(asyncloaduser());
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+
+export const asynallshops = () => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.get("/admin/shop");
+    console.log(data);
+    dispatch(setshops(data.shops));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};

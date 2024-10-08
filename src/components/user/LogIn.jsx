@@ -10,7 +10,9 @@ import { asyncloaduser } from "../../store/userActions";
 const LogIn = () => {
   const navigate = useNavigate();
   const Dispatch = useDispatch();
-  const { loading, isLoggedIn } = useSelector((state) => state.user);
+  const { page_loading, role } = useSelector((state) => state.user);
+  console.log(role);
+  
   const [page, setpage] = useState(0);
   const [formdata, setFormdata] = useState({
     username: "",
@@ -29,7 +31,7 @@ const LogIn = () => {
         setpage(1);
       }
     } catch (err) {
-      alert(err)
+      alert(err);
       console.log(err);
     }
   };
@@ -64,11 +66,13 @@ const LogIn = () => {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (role == "user") {
       navigate("/home");
+    } else if (role == "admin" || role == "shop") {
+      navigate("/admin");
     }
   }, []);
-  return loading ? (
+  return page_loading ? (
     <Loader />
   ) : (
     <>

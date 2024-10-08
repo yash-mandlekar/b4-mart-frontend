@@ -1,19 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../Css/Login.css";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncadminlogin } from "../../store/userActions";
+import { useNavigate } from "react-router-dom";
 const AdminLogin = () => {
+  const { role } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const [formdata, setFormdata] = useState({
+    contact: "",
+    password: "",
+  });
+  const { contact, password } = formdata;
+  const handleChange = (e) => {
+    setFormdata({ ...formdata, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(asyncadminlogin(formdata));
+  };
+  useEffect(() => {
+    if (role == "shop" || role == "admin") {
+      navigate("/admin");
+    }
+  }, [role]);
   return (
     <div className="adminpage" style={{ backgroundColor: "#e8e8e8" }}>
-      <form className="form-control" action="">
+      <form className="form-control" onSubmit={handleSubmit}>
         <p className="title">Admin Login</p>
         <div className="input-field">
-          <input required="" className="inputAdmin" type="text" />
-          <label className="label" for="inputAdmin">
-            Enter Email
+          <input
+            name="contact"
+            onChange={handleChange}
+            value={contact}
+            required=""
+            className="inputAdmin"
+            type="text"
+          />
+          <label className="label" htmlFor="inputAdmin">
+            Enter Number
           </label>
         </div>
         <div className="input-field">
-          <input required="" className="inputAdmin" type="password" />
-          <label className="label" for="inputAdmin">
+          <input
+            name="password"
+            onChange={handleChange}
+            value={password}
+            required=""
+            className="inputAdmin"
+            type="password"
+          />
+          <label className="label" htmlFor="inputAdmin">
             Enter Password
           </label>
         </div>

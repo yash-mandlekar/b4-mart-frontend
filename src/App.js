@@ -12,12 +12,15 @@ import SignUp from "./components/user/SignUp";
 import Cart from "./components/user/Cart";
 import AdminLogin from "./components/admin/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
-import Loader from "./components/common/Loader";
 import AdminShops from "./components/admin/AdminShops";
+import Dashboard from "./components/admin/Dashboard";
+import Loader from "./components/common/Loader";
 
 const App = () => {
   const notify = (msg) => toast(msg ?? "Something went wrong");
-  const { isLoggedIn, loading, error } = useSelector((state) => state.user);
+  const { role, page_loading, error } = useSelector((state) => state.user);
+  console.log(page_loading);
+
   const Dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,25 +31,34 @@ const App = () => {
     if (error) notify(error);
   }, [error]);
 
-  if (loading) {
+  if (page_loading) {
     return <Loader />;
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<LogIn />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/home" element={<Home />}>
-        <Route index element={<MainContent />} />
-        <Route path="shopProducts" element={<ShopProduct />} />
-        <Route path="singleProduct" element={<SingleProduct />} />
-        <Route path="cart" element={<Cart />} />
-      </Route>
+    <>
+      <Routes>
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminDashboard />}>
+          <Route index element={<Dashboard />} />
+          <Route path="shops" element={<AdminShops />} />
+          <Route path="orders" element={<></>} />
+          <Route path="users" element={<></>} />
+          <Route path="profile" element={<></>} />
+        </Route>
 
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/adminDashboard" element={<AdminDashboard />} />
-      <Route path="/adminShops" element={<AdminShops />} />
-    </Routes>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />}>
+          <Route index element={<MainContent />} />
+          <Route path="shopProducts" element={<ShopProduct />} />
+          <Route path="singleProduct" element={<SingleProduct />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
+
+        {/* <Route path="/admin/*" element={<>Not Authorized</>} /> */}
+      </Routes>
+    </>
   );
 };
 

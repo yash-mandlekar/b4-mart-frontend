@@ -5,13 +5,22 @@ const initialState = {
   products: null,
   isLoggedIn: false,
   error: null,
+  page_loading: true,
   loading: true,
+  role: null,
+  shops: [],
 };
 
 export const userSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    setpageloading: (state, action) => {
+      state.page_loading = true;
+    },
+    setpageloadingfalse: (state, action) => {
+      state.page_loading = false;
+    },
     setloading: (state, action) => {
       state.loading = true;
     },
@@ -21,8 +30,11 @@ export const userSlice = createSlice({
     loaduser: (state, action) => {
       state.user = action.payload;
       state.isLoggedIn = true;
-      state.loading = false;
       state.error = null;
+      state.role = action.payload.role;
+    },
+    setshops: (state, action) => {
+      state.shops = action.payload;
     },
     errors: (state, action) => {
       state.error = action.payload;
@@ -33,12 +45,21 @@ export const userSlice = createSlice({
       state.isLoggedIn = false;
       state.error = null;
       state.loading = false;
+      state.role = null;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setloading, loaduser, errors, setloadingfalse, logout } =
-  userSlice.actions;
+export const {
+  setloading,
+  loaduser,
+  errors,
+  setloadingfalse,
+  logout,
+  setshops,
+  setpageloading,
+  setpageloadingfalse
+} = userSlice.actions;
 
 export default userSlice.reducer;
