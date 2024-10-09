@@ -8,6 +8,7 @@ html,body{
   width: 100%;
 }
 .shop-table-container {
+  width: 100%;
   padding: 20px;
 }
 
@@ -70,4 +71,10 @@ html,body{
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+@media screen and (max-width: 960px) {
+  .shop-table-container{
+    padding: 10vmax 20px 20px 20px;
+  }
 }

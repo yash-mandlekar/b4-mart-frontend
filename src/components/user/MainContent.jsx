@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import Advertisement from "./Advertisement";
 import Shops from "./Shops";
 import "../../Css/Home.css";
-import Axios from "../../Axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { asynallshops } from "../../store/userActions";
 const MainContent = () => {
   const navigate = useNavigate();
+  const Dispatch = useDispatch();
+  const { user,shops } = useSelector((state) => state.user);
+  
   const [ads, setads] = useState([
     {
       url: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=720/layout-engine/2023-07/pharmacy-WEB.jpg",
@@ -20,80 +24,72 @@ const MainContent = () => {
     //   link: "",
     // },
   ]);
-  const [shops, setShops] = useState([
-    {
-      url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
-      link: "shopProducts",
-      name: "You & Me",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
-      link: "",
-      name: "Biryani shop",
-    },
-    {
-      url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
-      link: "",
-      name: "You & Me",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
-      link: "",
-      name: "Biryani shop",
-    },
-    {
-      url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
-      link: "",
-      name: "You & Me",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
-      link: "",
-      name: "Biryani shop",
-    },
-    {
-      url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
-      link: "",
-      name: "You & Me",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
-      link: "",
-      name: "Biryani shop",
-    },
-    {
-      url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
-      link: "",
-      name: "You & Me",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
-      link: "",
-      name: "Biryani shop",
-    },
-    {
-      url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
-      link: "",
-      name: "You & Me",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
-      link: "",
-      name: "Biryani shop",
-    },
-  ]);
+  // const [shops, setShops] = useState([
+  //   {
+  //     url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
+  //     link: "shopProducts",
+  //     name: "You & Me",
+  //   },
+  //   {
+  //     url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
+  //     link: "",
+  //     name: "Biryani shop",
+  //   },
+  //   {
+  //     url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
+  //     link: "",
+  //     name: "You & Me",
+  //   },
+  //   {
+  //     url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
+  //     link: "",
+  //     name: "Biryani shop",
+  //   },
+  //   {
+  //     url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
+  //     link: "",
+  //     name: "You & Me",
+  //   },
+  //   {
+  //     url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
+  //     link: "",
+  //     name: "Biryani shop",
+  //   },
+  //   {
+  //     url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
+  //     link: "",
+  //     name: "You & Me",
+  //   },
+  //   {
+  //     url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
+  //     link: "",
+  //     name: "Biryani shop",
+  //   },
+  //   {
+  //     url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
+  //     link: "",
+  //     name: "You & Me",
+  //   },
+  //   {
+  //     url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
+  //     link: "",
+  //     name: "Biryani shop",
+  //   },
+  //   {
+  //     url: "https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg",
+  //     link: "",
+  //     name: "You & Me",
+  //   },
+  //   {
+  //     url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2tv9RdTO23Nmk02wJECUCW1CkmOfNnBWmg&s",
+  //     link: "",
+  //     name: "Biryani shop",
+  //   },
+  // ]);
+  
   useEffect(() => {
-    // fetchData();
+    Dispatch(asynallshops());
   }, []);
-  const fetchData = async () => {
-    try {
-      const { data } = await Axios.get("/users");
-      // console.log(data);
-    } catch (err) {
-      navigate("/");
-      // alert(err.response.data.message);
-    }
-  };
   return (
     <div className="category">
       <div className="ad-base">

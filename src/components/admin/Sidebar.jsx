@@ -3,19 +3,20 @@ import React, { useState } from "react";
 import "../../Css/Sidebar.css";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiRedPacketLine } from "react-icons/ri";
-
+import { BsBag } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { TbUsersGroup } from "react-icons/tb";
 
 import { GoHome } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { asynclogout } from "../../store/userActions";
 export default function Sidebar() {
+  const { role } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const Dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -23,7 +24,7 @@ export default function Sidebar() {
   const handleLogout = async () => {
     if (window.confirm("Are you really want to logout?")) {
       Dispatch(asynclogout());
-      navigate("/admin-login")
+      navigate("/admin-login");
     }
   };
   return (
@@ -46,20 +47,30 @@ export default function Sidebar() {
                 Dashboard
               </Link>
             </li>
+            {role == "admin" && (
+              <>
+                <li>
+                  <Link to="/admin/shops">
+                    <GoHome /> Shops
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin/users">
+                    <TbUsersGroup />
+                    Users
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
-              <Link to="/admin/shops">
-                <GoHome /> Shops
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/orders">
-                <RiRedPacketLine /> Orders
+              <Link to="/admin/products">
+                <BsBag />
+                Products
               </Link>
             </li>
             <li className="bottomBor">
-              <Link to="/admin/users">
-                <TbUsersGroup />
-                Users
+              <Link to="/admin/orders">
+                <RiRedPacketLine /> Orders
               </Link>
             </li>
           </ul>

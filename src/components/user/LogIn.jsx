@@ -11,21 +11,18 @@ const LogIn = () => {
   const navigate = useNavigate();
   const Dispatch = useDispatch();
   const { page_loading, role } = useSelector((state) => state.user);
-  console.log(role);
-  
+
   const [page, setpage] = useState(0);
   const [formdata, setFormdata] = useState({
-    username: "",
     contact: "",
     otp: "",
   });
-  const { username, contact, otp } = formdata;
+  const { contact, otp } = formdata;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (username.length < 3) return notify("Enter a vaild username");
       if (contact.length != 10) return notify("Enter a vaild number");
-      const { data } = await Axios.post("/login", { username, contact });
+      const { data } = await Axios.post("/login", { contact });
       if (data.message == "OTP send succesfully") {
         notify(data.user.otp);
         setpage(1);
@@ -52,12 +49,10 @@ const LogIn = () => {
   };
   const hack = async () => {
     const { data } = await Axios.post("/login", {
-      username: "yash",
       contact: "1234567890",
     });
     if (data.message == "OTP send succesfully") {
       setFormdata({
-        username: "yash",
         contact: "1234567890",
         otp: data.user.otp,
       });
@@ -97,17 +92,6 @@ const LogIn = () => {
             {page == 0 ? (
               <form className="form" onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <label htmlFor="password">Username</label>
-                  <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Username"
-                    onChange={handleChange}
-                    value={username}
-                  />
-                </div>
-                <div className="input-group">
                   <label htmlFor="username">Mobile</label>
                   <input
                     type="number"
@@ -139,20 +123,11 @@ const LogIn = () => {
             )}
             <div className="social-message">
               <div className="line"></div>
-              <p className="message">OR</p>
+              <p className="message"></p>
               <div className="line"></div>
-            </div>
-            <div className="signUp">
-              <p className="sign-up-label">
-                Don't have an account? &nbsp;
-                <Link to="/signup">
-                  <span className="sign-up-link"> Sign up</span>
-                </Link>
-              </p>
             </div>
 
             <div className="link">
-              <Link>Customer care</Link>
               <Link>Terms & Conditions</Link>
               <Link>Support</Link>
             </div>

@@ -252,12 +252,11 @@ nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 2vw;
+  gap: 2vmax;
 }
 .shoperBox {
-  width: 12vmax;
-  height: 14vmax;
+  width: 20vh;
+  height: 24vh;
   overflow: hidden;
   position: relative;
   background-color: white;

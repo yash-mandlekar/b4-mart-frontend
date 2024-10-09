@@ -36,6 +36,12 @@ export const userSlice = createSlice({
     setshops: (state, action) => {
       state.shops = action.payload;
     },
+    createshops: (state, action) => {
+      state.shops.push(action.payload);
+    },
+    removeshops: (state, action) => {
+      state.shops = state.shops.filter((shop) => shop._id !== action.payload);
+    },
     errors: (state, action) => {
       state.error = action.payload;
       state.loading = false;
@@ -58,8 +64,10 @@ export const {
   setloadingfalse,
   logout,
   setshops,
+  createshops,
+  removeshops,
   setpageloading,
-  setpageloadingfalse
+  setpageloadingfalse,
 } = userSlice.actions;
 
 export default userSlice.reducer;

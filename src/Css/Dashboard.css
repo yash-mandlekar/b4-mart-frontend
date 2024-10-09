@@ -10,7 +10,6 @@ html,body{
 .dash{
   width: 100vw;
   height: 100vh;
-  padding-left: 20%;
   padding-top: 1vmax;
   background-color: white
 }
