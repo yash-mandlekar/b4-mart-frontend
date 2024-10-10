@@ -78,3 +78,11 @@ html,body{
     padding: 10vmax 20px 20px 20px;
   }
 }
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table img {
+  border-radius: 4px;
+}

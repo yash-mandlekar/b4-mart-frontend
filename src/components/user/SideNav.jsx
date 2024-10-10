@@ -39,7 +39,7 @@ const SideNav = () => {
           <NavLink to="/notification" activeclassname="active">
             <img src={search} alt="" />
           </NavLink>
-          <NavLink to="/cart" activeclassname="active">
+          <NavLink to="/home/cart" activeclassname="active">
             <img src={cart} alt="" />
           </NavLink>
           <NavLink to="/notification" activeclassname="active">

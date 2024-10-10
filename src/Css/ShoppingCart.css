@@ -20,6 +20,7 @@ html,body{
   width: 85vw;
   height: fit-content;
   padding: 1vmax;
+  padding-top: 3vmax;
   background-color: rgb(255, 255, 255);
 }
 .shoppingItemImg{
@@ -165,7 +166,8 @@ display: flex;
     display: none;
   }
   .shoppingCart{
-   padding: 0 0;
+   padding: 0;
+   padding-top: 15vmax;
   }
   .longBox{
     width: 100vw;
@@ -173,4 +175,5 @@ display: flex;
     padding: 1vmax;
     background-color: rgb(255, 255, 255);
   }
+  
 }
