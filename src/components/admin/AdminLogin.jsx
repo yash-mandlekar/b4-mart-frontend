@@ -37,10 +37,9 @@ const AdminLogin = () => {
             required=""
             className="inputAdmin"
             type="text"
+            placeholder="Enter Number"
           />
-          <label className="label" htmlFor="inputAdmin">
-            Enter Number
-          </label>
+         
         </div>
         <div className="input-field">
           <input
@@ -50,10 +49,9 @@ const AdminLogin = () => {
             required=""
             className="inputAdmin"
             type="password"
+            placeholder="Password"
           />
-          <label className="label" htmlFor="inputAdmin">
-            Enter Password
-          </label>
+        
         </div>
 
         <button className="submit-btn">Sign In</button>

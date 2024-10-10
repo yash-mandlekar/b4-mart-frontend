@@ -18,7 +18,7 @@ import Loader from "./components/common/Loader";
 import Orders from "./components/admin/Orders";
 import Users from "./components/admin/Users";
 import Profile from "./components/admin/Profile";
-
+import UserProfile from "./components/user/Profile"
 const App = () => {
   const notify = (msg) => toast(msg ?? "Something went wrong");
   const { page_loading, error } = useSelector((state) => state.user);
@@ -56,6 +56,7 @@ const App = () => {
           <Route path="shopProducts/:id" element={<ShopProduct />} />
           <Route path=":id" element={<SingleProduct />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </>

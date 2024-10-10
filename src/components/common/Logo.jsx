@@ -1,12 +1,13 @@
 import React from "react";
 import "../../Css/Home.css";
 import { NavLink } from "react-router-dom";
+import Logos from "../../Images/B4mart.png"
 const Logo = () => {
   return (
-    <NavLink to="/" activeclassname="active">
+    <NavLink to="/" className="monty" activeclassname="active">
       <div className="logo">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzgPzxtp5uy5Fiw8PUeXlVCh3Pr9T2k__8KA&s"
+          src={Logos}
           alt=""
         />
       </div>

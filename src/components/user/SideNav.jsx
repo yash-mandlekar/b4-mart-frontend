@@ -30,7 +30,7 @@ const SideNav = () => {
           <NavLink to="/home" activeclassname="active">
             <img src={Vector} alt="" />
           </NavLink>
-          <NavLink to="/profile" activeclassname="active">
+          <NavLink to="/home/profile" activeclassname="active">
             <img src={Profile} alt="" />
           </NavLink>
           <NavLink to="/notification" activeclassname="active">
