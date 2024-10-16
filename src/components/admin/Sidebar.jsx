@@ -7,7 +7,7 @@ import { BsBag } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { TbUsersGroup } from "react-icons/tb";
-
+import Logo from "../../Images/B4mart.png"
 import { GoHome } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ export default function Sidebar() {
         <div>
           <div className="sidebar-header">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmbXvNqkhcYqj4uBAqTha7Asn8b-93L0dBwQ&s"
+              src={Logo}
               alt="B4Mart Logo"
               className="logo"
             />
