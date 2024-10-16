@@ -24,8 +24,8 @@ height: 100%;
   
   .profile-edit-sidebar {
     width: 25%;
-    background-color: #5b2886;
-    color: white;
+    background-color: #dadada;
+    color: black;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@ height: 100%;
   }
   
   .profile-edit-email {
-    color: #ddd;
+    color: black;
   }
   
   .profile-edit-menu {
@@ -60,7 +60,7 @@ height: 100%;
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    background-color: #702cb5;
+    background-color: #5b2886;
     color: white;
     border: none;
     cursor: pointer;
@@ -69,7 +69,7 @@ height: 100%;
   }
   
   .profile-edit-menu-button:hover {
-    background-color: #8745cc;
+    background-color: #702cb5;
   }
   
   .profile-edit-form {

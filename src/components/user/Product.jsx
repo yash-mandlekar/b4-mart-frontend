@@ -16,15 +16,18 @@ const Product = ({ data }) => {
   
   return (
     <>
-    <Link to={data.link}>
     <div className="productBox">
+    <Link to={data.link}>
         <div className="image">
           <img src={data.img} alt="" />
         </div>
+        </Link>
         <div className="content">
+        <Link to={data.link}>
           <div className="name boxi">
             <p>{data.productName} </p>
           </div>
+          </Link>
           <div className="quantity boxi"> {data.quantity} </div>
           <div className="overlap">
             <div className="price "> ₹{data.price}</div>
@@ -79,7 +82,7 @@ const Product = ({ data }) => {
           </div>
         </div>
       </div>
-    </Link>
+    
     </>
   );
 };
