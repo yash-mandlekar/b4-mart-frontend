@@ -13,6 +13,7 @@ import {
   removeproducts,
   createproduct,
   setsingleshop_products,
+  updatecart,
 } from "./UserSlice";
 import Axios from "../Axios";
 import { notify } from "../components/common/Toast";
@@ -23,6 +24,7 @@ export const asyncloaduser = () => async (dispatch) => {
     const { data } = await Axios.get("/me");
     if (data.success) {
       dispatch(loaduser(data.user));
+      dispatch(updatecart(data.user.cart))
     }
     dispatch(setpageloadingfalse());
   } catch (err) {
@@ -93,7 +95,7 @@ export const asynccreateproduct = (formdata) => async (dispatch) => {
     dispatch(setloading());
     const { data } = await Axios.post("/admin/product", formdata);
     console.log(data);
-    
+
     dispatch(createproduct(data.product));
     notify(data.message);
 
@@ -130,6 +132,26 @@ export const asyncremoveproduct = (id) => async (dispatch) => {
     dispatch(setloading());
     await Axios.delete(`/admin/product/${id}`);
     dispatch(removeproducts(id));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+export const asyncaddcart = (id) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.post(`/add_cart/${id}`);
+    dispatch(updatecart(data.cart));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+export const asyncremovecart = (id) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.post(`/remove_cart/${id}`);
+    dispatch(updatecart(data.cart));
     dispatch(setloadingfalse());
   } catch (err) {
     dispatch(errors(err?.response?.data?.message));

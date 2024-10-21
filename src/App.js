@@ -23,6 +23,7 @@ import UserProfile from "./components/user/Profile";
 const App = () => {
   const notify = (msg) => toast(msg ?? "Something went wrong");
   const { page_loading, error } = useSelector((state) => state.user);
+  
 
   const Dispatch = useDispatch();
 

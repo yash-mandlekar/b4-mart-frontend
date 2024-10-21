@@ -8,29 +8,6 @@ const ShopProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { singleshop_products } = useSelector((state) => state.user);
-  // const [product, setProduct] = useState([
-  //   {
-  //     img: "https://5.imimg.com/data5/SELLER/Default/2021/9/SZ/QF/KE/99188395/ice-cream-packaging-boxes-3-1524677180-8.jpg",
-  //     productName: "Vanilla Icecream",
-  //     quantity: "500g",
-  //     price: 250,
-  //     link: "/home/singleProduct",
-  //   },
-  //   {
-  //     img: "https://5.imimg.com/data5/SELLER/Default/2021/9/SZ/QF/KE/99188395/ice-cream-packaging-boxes-3-1524677180-8.jpg",
-  //     productName: "Vanilla Icecream",
-  //     quantity: "500g",
-  //     price: 250,
-  //     link: "/home/singleProduct",
-  //   },
-  //   {
-  //     img: "https://5.imimg.com/data5/SELLER/Default/2021/9/SZ/QF/KE/99188395/ice-cream-packaging-boxes-3-1524677180-8.jpg",
-  //     productName: "Vanilla Icecream",
-  //     quantity: "500g",
-  //     price: 250,
-  //     link: "/home/singleProduct",
-  //   },
-  // ]);
   useEffect(() => {
     if (id) {
       dispatch(asynsingleshopproducts(id));
