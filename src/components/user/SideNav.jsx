@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Css/Home.css";
 import { Link, NavLink } from "react-router-dom";
 import Vector from "../../assets/Vector.svg";
 import Profile from "../../assets/profile.svg";
 import Notification from "../../assets/notification.svg";
 import search from "../../assets/search.svg";
-import cart from "../../assets/cart.svg";
+import cartlogo from "../../assets/cart.svg";
 import location from "../../assets/location.svg";
 import Logout from "../../assets/logout.svg";
 import Logo from "../common/Logo";
 import { asynclogout } from "../../store/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SideNav = () => {
   const Dispatch = useDispatch();
+  const [counter, setcounter] = useState(0);
+  const { cart } = useSelector((state) => state.user);
+  console.log(cart);
+
+  useEffect(() => {
+    var count = 0;
+    cart.map((e) => {
+      count += e.count;
+    });
+    setcounter(count);
+  }, [cart]);
   const handleLogout = async () => {
     if (window.confirm("Are you really want to logout?")) {
       Dispatch(asynclogout());
@@ -38,20 +49,21 @@ const SideNav = () => {
           >
             <img src={Profile} alt="" />
           </NavLink> */}
-          <Link >
+          <Link>
             <img src={Notification} alt="" />
           </Link>
-          <Link >
+          <Link>
             <img src={search} alt="" />
           </Link>
           <NavLink
-            to="/home/cart" id="cartOption"
+            to="/home/cart"
+            id="cartOption"
             className={({ isActive }) => (isActive ? "active" : "inactive")}
           >
-          <div className="circ">1</div>
-            <img src={cart} alt="" />
+            {counter > 0 && <div className="circ">{counter}</div>}
+            <img src={cartlogo} alt="" />
           </NavLink>
-          <Link >
+          <Link>
             <img src={location} alt="" />
           </Link>
         </div>
