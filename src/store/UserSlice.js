@@ -10,6 +10,7 @@ const initialState = {
   shops: [],
   products: [],
   singleshop_products: [],
+  cart: [],
 };
 
 export const userSlice = createSlice({
@@ -57,6 +58,9 @@ export const userSlice = createSlice({
     setsingleshop_products: (state, action) => {
       state.singleshop_products = action.payload;
     },
+    updatecart: (state, action) => {
+      state.cart = action.payload
+    },
     errors: (state, action) => {
       state.error = action.payload;
       state.loading = false;
@@ -87,6 +91,7 @@ export const {
   removeproducts,
   createproduct,
   setsingleshop_products,
+  updatecart,
 } = userSlice.actions;
 
 export default userSlice.reducer;
