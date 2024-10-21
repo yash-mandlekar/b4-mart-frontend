@@ -16,7 +16,6 @@ const SideNav = () => {
   const Dispatch = useDispatch();
   const [counter, setcounter] = useState(0);
   const { cart } = useSelector((state) => state.user);
-  console.log(cart);
 
   useEffect(() => {
     var count = 0;
