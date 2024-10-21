@@ -45,7 +45,24 @@ body {
 .top-nav .top-nav-profile {
   width: 100%;
 }
+#cartOption{
 
+  position: relative;
+}
+.circ{
+  width:1vmax ;
+  height: 1vmax;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  position: absolute;
+  right: 7px;
+  top: 23%;
+  border-radius: 50%;
+  background-color:rgb(188, 22, 22);
+}
 /* Search box startig */
 .searchBox {
   width: 90%;
@@ -309,6 +326,7 @@ nav {
   .top-nav{
     display: flex;
   }
+  
 }
 @media screen and (max-width: 430px) {
   .boxex {
@@ -317,5 +335,19 @@ nav {
   .shoperBox {
     width: 47%;
     height: 24vh;
+  }
+  .circ{
+    width:2vmax ;
+    height: 2vmax;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    position: absolute;
+    right: 0px;
+    top: 0%;
+    border-radius: 50%;
+    background-color:rgb(188, 22, 22);
   }
 }
