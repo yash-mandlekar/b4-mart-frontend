@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SideNav from "./SideNav";
 import "../../Css/ShoppingCart.css";
 import CartBox from "./CartBox";
-
+// import Notify from "../common/Notification"
 const Cart = () => {
   
     const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +49,7 @@ const Cart = () => {
       <div className="shoppingCart">
         <div className="longBox">
           <h1>Cart List</h1>
+          
           {singleProduct.map((e,i)=>(
             <CartBox data={e} key={i}/>
           ))}

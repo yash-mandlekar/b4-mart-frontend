@@ -16,9 +16,10 @@ import Products from "./components/admin/Products";
 import Dashboard from "./components/admin/Dashboard";
 import Loader from "./components/common/Loader";
 import Orders from "./components/admin/Orders";
+import Firebase from "./components/admin/Firebase";
 import Users from "./components/admin/Users";
 import Profile from "./components/admin/Profile";
-import UserProfile from "./components/user/Profile"
+import UserProfile from "./components/user/Profile";
 const App = () => {
   const notify = (msg) => toast(msg ?? "Something went wrong");
   const { page_loading, error } = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/fire" element={<Firebase />}/>
         <Route path="/admin" element={<AdminDashboard />}>
           <Route index element={<Dashboard />} />
           <Route path="shops" element={<AdminShops />} />
@@ -49,15 +51,16 @@ const App = () => {
           <Route path="users" element={<Users />} />
           <Route path="profile" element={<Profile />} />
         </Route>
-
-        <Route path="/" element={<LogIn />} />
-        <Route path="/home" element={<Home />}>
-          <Route index element={<MainContent />} />
-          <Route path="shopProducts/:id" element={<ShopProduct />} />
-          <Route path=":id" element={<SingleProduct />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="profile" element={<UserProfile />} />
-        </Route>
+       
+          <Route path="/" element={<LogIn />} />
+          <Route path="/home" element={<Home />}>
+            <Route index element={<MainContent />} />
+            <Route path="shopProducts/:id" element={<ShopProduct />} />
+            <Route path=":id" element={<SingleProduct />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="profile" element={<UserProfile />} />
+          </Route>
+        
       </Routes>
     </>
   );

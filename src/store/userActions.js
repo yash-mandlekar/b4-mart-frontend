@@ -9,6 +9,10 @@ import {
   setpageloadingfalse,
   createshops,
   removeshops,
+  setproducts,
+  removeproducts,
+  createproduct,
+  setsingleshop_products,
 } from "./UserSlice";
 import Axios from "../Axios";
 import { notify } from "../components/common/Toast";
@@ -61,6 +65,7 @@ export const asynccreateshop = (formdata) => async (dispatch) => {
     dispatch(errors(err?.response?.data?.message));
   }
 };
+
 export const asyncremoveshop = (id) => async (dispatch) => {
   try {
     dispatch(setloading());
@@ -77,6 +82,54 @@ export const asynallshops = () => async (dispatch) => {
     dispatch(setloading());
     const { data } = await Axios.get("/admin/shop");
     dispatch(setshops(data.shops));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+
+export const asynccreateproduct = (formdata) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.post("/admin/product", formdata);
+    console.log(data);
+    
+    dispatch(createproduct(data.product));
+    notify(data.message);
+
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+
+export const asynallproducts = () => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.get("/admin/product");
+    dispatch(setproducts(data.products));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+
+export const asynsingleshopproducts = (id) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.get(`/admin/singleshop/products/${id}`);
+    dispatch(setsingleshop_products(data.products));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+
+export const asyncremoveproduct = (id) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    await Axios.delete(`/admin/product/${id}`);
+    dispatch(removeproducts(id));
     dispatch(setloadingfalse());
   } catch (err) {
     dispatch(errors(err?.response?.data?.message));

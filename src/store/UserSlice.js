@@ -2,13 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
-  products: null,
   isLoggedIn: false,
   error: null,
   page_loading: true,
   loading: true,
   role: null,
   shops: [],
+  products: [],
+  singleshop_products: [],
 };
 
 export const userSlice = createSlice({
@@ -42,6 +43,20 @@ export const userSlice = createSlice({
     removeshops: (state, action) => {
       state.shops = state.shops.filter((shop) => shop._id !== action.payload);
     },
+    setproducts: (state, action) => {
+      state.products = action.payload;
+    },
+    createproduct: (state, action) => {
+      state.products.push(action.payload);
+    },
+    removeproducts: (state, action) => {
+      state.products = state.products.filter(
+        (product) => product._id !== action.payload
+      );
+    },
+    setsingleshop_products: (state, action) => {
+      state.singleshop_products = action.payload;
+    },
     errors: (state, action) => {
       state.error = action.payload;
       state.loading = false;
@@ -59,6 +74,8 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setloading,
+  setpageloading,
+  setpageloadingfalse,
   loaduser,
   errors,
   setloadingfalse,
@@ -66,8 +83,10 @@ export const {
   setshops,
   createshops,
   removeshops,
-  setpageloading,
-  setpageloadingfalse,
+  setproducts,
+  removeproducts,
+  createproduct,
+  setsingleshop_products,
 } = userSlice.actions;
 
 export default userSlice.reducer;

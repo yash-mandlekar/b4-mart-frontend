@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../Css/Home.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Vector from "../../assets/Vector.svg";
 import Profile from "../../assets/profile.svg";
 import Notification from "../../assets/notification.svg";
@@ -17,35 +17,44 @@ const SideNav = () => {
   const handleLogout = async () => {
     if (window.confirm("Are you really want to logout?")) {
       Dispatch(asynclogout());
-      // if (data.success) {
-      //   navigate("/");
-      // }
     }
   };
+
   return (
     <div className="sideNav">
       <Logo />
       <div className="sideNavBase">
         <div className="navTop">
-          <NavLink to="/home" activeclassname="active">
+          <NavLink
+            to="/home"
+            end
+            className={({ isActive }) => (isActive ? "active" : "inactive")}
+          >
             <img src={Vector} alt="" />
           </NavLink>
-          <NavLink to="/home/profile" activeclassname="active">
+          <NavLink
+            to="/home/profile"
+            className={({ isActive }) => (isActive ? "active" : "inactive")}
+          >
             <img src={Profile} alt="" />
           </NavLink>
-          <NavLink to="/notification" activeclassname="active">
+          <Link >
             <img src={Notification} alt="" />
-          </NavLink>
-          <NavLink to="/notification" activeclassname="active">
+          </Link>
+          <Link >
             <img src={search} alt="" />
-          </NavLink>
-          <NavLink to="/home/cart" activeclassname="active">
+          </Link>
+          <NavLink
+            to="/home/cart"
+            className={({ isActive }) => (isActive ? "active" : "inactive")}
+          >
             <img src={cart} alt="" />
           </NavLink>
-          <NavLink to="/notification" activeclassname="active">
+          <Link >
             <img src={location} alt="" />
-          </NavLink>
+          </Link>
         </div>
+
         <div className="navBottom">
           <button onClick={handleLogout} className="logout">
             <img src={Logout} alt="" />
