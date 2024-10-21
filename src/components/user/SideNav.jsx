@@ -32,12 +32,12 @@ const SideNav = () => {
           >
             <img src={Vector} alt="" />
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/home/profile"
             className={({ isActive }) => (isActive ? "active" : "inactive")}
           >
             <img src={Profile} alt="" />
-          </NavLink>
+          </NavLink> */}
           <Link >
             <img src={Notification} alt="" />
           </Link>
