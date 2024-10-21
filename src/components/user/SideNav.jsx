@@ -45,9 +45,10 @@ const SideNav = () => {
             <img src={search} alt="" />
           </Link>
           <NavLink
-            to="/home/cart"
+            to="/home/cart" id="cartOption"
             className={({ isActive }) => (isActive ? "active" : "inactive")}
           >
+          <div className="circ">1</div>
             <img src={cart} alt="" />
           </NavLink>
           <Link >
