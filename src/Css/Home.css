@@ -200,7 +200,7 @@ nav {
   border-radius: 15px;
   box-shadow: 0px 4px 7.2px 1px #00000086;
 }
-.searchBox .top-nav a{
+.searchBox .top-nav-item{
   padding: 10px;
   }
 .logout {

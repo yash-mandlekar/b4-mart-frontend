@@ -71,12 +71,12 @@ const SideNav = () => {
           <button onClick={handleLogout} className="logout">
             <img src={Logout} alt="" />
           </button>
-          <div className="profile">
+          <Link to="/home/profile" className="profile">
             <img
               src="https://images.unsplash.com/photo-1629364964671-053e86d40e63?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
-          </div>
+          </Link>
         </div>
       </div>
     </div>

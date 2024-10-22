@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../../Css/item.css";
 import Axios from "../../Axios";
+import { asyncaddcart, asyncremovecart } from "../../store/userActions";
+import { useDispatch, useSelector } from "react-redux";
 const SingleProduct = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.user);
   const [singleProduct, setSingleProduct] = useState();
   const [count, setCount] = useState(0);
 
-  const increaseQuantity = () => {
+  const increaseQuantity = (id) => {
+    dispatch(asyncaddcart(id));
     setCount((prev) => prev + 1);
   };
 
-  const decreaseQuantity = () => {
+  const decreaseQuantity = (id) => {
+    dispatch(asyncremovecart(id));
     setCount((prev) => (prev > 1 ? prev - 1 : 0));
   };
 
@@ -24,9 +30,14 @@ const SingleProduct = () => {
   const getProduct = async (id) => {
     try {
       const { data } = await Axios.get(`/singleproduct/${id}`);
-      console.log(data.data.productpic);
-
       setSingleProduct(data.data);
+      console.log(cart);
+      var a = cart?.filter((e) => {
+        return e.product._id == data.data._id;
+      });
+      if (a[0]) {
+        setCount(a[0]?.count);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -51,12 +62,18 @@ const SingleProduct = () => {
               </p>
               <button type="button" className="button">
                 {count === 0 ? (
-                  <span className="button__text" onClick={increaseQuantity}>
+                  <span
+                    className="button__text"
+                    onClick={() => increaseQuantity(singleProduct?._id)}
+                  >
                     Add Item
                   </span>
                 ) : (
                   <div className="button__content">
-                    <span className="button__icon" onClick={decreaseQuantity}>
+                    <span
+                      className="button__icon"
+                      onClick={() => decreaseQuantity(singleProduct?._id)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -73,7 +90,10 @@ const SingleProduct = () => {
                       </svg>
                     </span>
                     <span className="button__text">{count}</span>
-                    <span className="button__icon" onClick={increaseQuantity}>
+                    <span
+                      className="button__icon"
+                      onClick={() => increaseQuantity(singleProduct?._id)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
