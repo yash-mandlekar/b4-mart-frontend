@@ -141,6 +141,8 @@ export const asyncaddcart = (id) => async (dispatch) => {
   try {
     dispatch(setloading());
     const { data } = await Axios.post(`/add_cart/${id}`);
+    console.log(data);
+    
     dispatch(updatecart(data.cart));
     dispatch(setloadingfalse());
   } catch (err) {

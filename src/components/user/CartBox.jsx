@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const CartBox = ({ data }) => {
   const [quantity, setQuantity] = useState(data.count);
   const { product } = data;
-  console.log(product);
 
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideNav from "./SideNav";
 import "../../Css/ShoppingCart.css";
 import CartBox from "./CartBox";
@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 // import Notify from "../common/Notification"
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [counter, setcounter] = useState(0);
+  const [total, settotal] = useState(0);
   const { cart } = useSelector((state) => state.user);
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -37,6 +39,20 @@ const Cart = () => {
     console.log("Form Data Submitted:", formData);
     alert("Address Saved!");
   };
+
+  useEffect(() => {
+    var count = 0;
+    cart.map((e) => {
+      count += e.count;
+    });
+    var tot = 0;
+    cart.map((e) => {
+      tot += e.count * e.product.price;
+    });
+    settotal(tot);
+    setcounter(count);
+  }, [cart]);
+
   return (
     <div>
       <div className="shoppingCart">
@@ -48,12 +64,12 @@ const Cart = () => {
           ))}
           <div className="billContainer">
             <h1>Bill Details</h1>
-            <p>Total Items : 1</p>
-            <p>Delivery Charge : 0</p>
-            <p>Handling Charge : ₹2</p>
+            <p>Total Items : {counter}</p>
+            {/* <p>Delivery Charge : 0</p> */}
+            {/* <p>Handling Charge : ₹2</p> */}
             <div className="payrap">
               <h2>
-                Grand total(1 item) : <span>₹250</span>
+                Grand total(1 item) : <span>{total}</span>
               </h2>
               <button className="button" onClick={toggleModal}>
                 Procced to pay

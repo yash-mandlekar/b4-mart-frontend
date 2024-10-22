@@ -23,7 +23,6 @@ import UserProfile from "./components/user/Profile";
 const App = () => {
   const notify = (msg) => toast(msg ?? "Something went wrong");
   const { page_loading, error } = useSelector((state) => state.user);
-  
 
   const Dispatch = useDispatch();
 
@@ -43,7 +42,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/fire" element={<Firebase />}/>
+        <Route path="/fire" element={<Firebase />} />
         <Route path="/admin" element={<AdminDashboard />}>
           <Route index element={<Dashboard />} />
           <Route path="shops" element={<AdminShops />} />
@@ -52,16 +51,15 @@ const App = () => {
           <Route path="users" element={<Users />} />
           <Route path="profile" element={<Profile />} />
         </Route>
-       
-          <Route path="/" element={<LogIn />} />
-          <Route path="/home" element={<Home />}>
-            <Route index element={<MainContent />} />
-            <Route path="shopProducts/:id" element={<ShopProduct />} />
-            <Route path=":id" element={<SingleProduct />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="profile" element={<UserProfile />} />
-          </Route>
-        
+
+        <Route path="/" element={<LogIn />} />
+        <Route path="/home" element={<Home />}>
+          <Route index element={<MainContent />} />
+          <Route path="shopProducts/:id" element={<ShopProduct />} />
+          <Route path=":id" element={<SingleProduct />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="profile" element={<UserProfile />} />
+        </Route>
       </Routes>
     </>
   );
