@@ -9,6 +9,7 @@ import SingleProduct from "./components/user/SingleProduct";
 import MainContent from "./components/user/MainContent";
 import LogIn from "./components/user/LogIn";
 import Cart from "./components/user/Cart";
+import UserOrder from "./components/user/UserOrders";
 import AdminLogin from "./components/admin/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminShops from "./components/admin/AdminShops";
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="shopProducts/:id" element={<ShopProduct />} />
           <Route path=":id" element={<SingleProduct />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="orders" element={<UserOrder />} />
           <Route path="profile" element={<UserProfile />} />
         </Route>
       </Routes>

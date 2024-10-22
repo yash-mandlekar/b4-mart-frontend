@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../Css/Home.css";
+import { IoClose } from "react-icons/io5";
+
 import { Link, NavLink } from "react-router-dom";
 import Vector from "../../assets/Vector.svg";
 import Profile from "../../assets/profile.svg";
@@ -16,7 +18,7 @@ const SideNav = () => {
   const Dispatch = useDispatch();
   const [counter, setcounter] = useState(0);
   const { cart } = useSelector((state) => state.user);
-
+ 
   useEffect(() => {
     var count = 0;
     cart.map((e) => {
@@ -42,15 +44,11 @@ const SideNav = () => {
           >
             <img src={Vector} alt="" />
           </NavLink>
-          {/* <NavLink
-            to="/home/profile"
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-          >
-            <img src={Profile} alt="" />
-          </NavLink> */}
-          <Link>
+         
+          <NavLink to={"/home/orders"} >
             <img src={Notification} alt="" />
-          </Link>
+          </NavLink>
+          
           <Link>
             <img src={search} alt="" />
           </Link>
