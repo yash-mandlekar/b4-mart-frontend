@@ -3,6 +3,8 @@ import SideNav from "./SideNav";
 import "../../Css/ShoppingCart.css";
 import CartBox from "./CartBox";
 import { useSelector } from "react-redux";
+import Axios from "../../Axios";
+import { notify } from "../common/Toast";
 // import Notify from "../common/Notification"
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,13 +16,13 @@ const Cart = () => {
   };
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    contactNo: "",
-    pincode: "",
-    houseDetails: "",
-    areaDetails: "",
-    landmark: "",
-    townCity: "",
+    fullName: "Yash",
+    contactNo: "9826818996",
+    pincode: "462022",
+    houseDetails: "Flat 901,palash parisar",
+    areaDetails: "near sage university",
+    landmark: "Highway",
+    townCity: "rau,indore",
     defaultAddress: false,
   });
 
@@ -34,11 +36,52 @@ const Cart = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    alert("Address Saved!");
+    // console.log("Form Data Submitted:", formData);
+  
+    try {
+      // Get order details from the server
+      const {data} = await Axios.get('http://localhost:4000/api/create_order');
+      console.log(data);
+  
+      // Initialize Razorpay Payment
+      const options = {
+        key: 'rzp_test_LQzqvbK2cWMGRg', // Replace with your Razorpay Key ID
+        amount: data?.amount * 100, // Convert to paise
+        currency: 'INR',
+        name: 'B4 Mart',
+        description: 'Test Transaction',
+        order_id: data?.id,
+        // image: "/static/media/B4mart.3c7b651ef058639fabff.png",
+        image: "https://b4mart.com/static/media/B4mart.3c7b651ef058639fabff.png",
+        handler: function (response) {
+          notify(`Payment Successful`);
+        },
+        prefill: {
+          name: formData.fullName,
+          contact: formData.contactNo,
+          email: 'test@example.com', // Optional
+        },
+        theme: {
+          color: '#3399cc',
+        },
+      };
+  
+      // Open Razorpay Checkout
+      const rzp = new window.Razorpay(options);
+      rzp.open(); // Open without arguments
+  
+    } catch (error) {
+      console.error("Payment failed:", error);
+      alert("Payment failed. Please try again.");
+    }
   };
+  
+
+
+  
 
   useEffect(() => {
     var count = 0;
@@ -69,7 +112,7 @@ const Cart = () => {
             {/* <p>Handling Charge : ₹2</p> */}
             <div className="payrap">
               <h2>
-                Grand total(1 item) : <span>{total}</span>
+                Grand total(1 item) : <span>₹ {total}</span>
               </h2>
               <button className="button" onClick={toggleModal}>
                 Procced to pay
