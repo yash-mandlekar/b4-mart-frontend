@@ -43,7 +43,7 @@ const Cart = () => {
   
     try {
       // Get order details from the server
-      const {data} = await Axios.get('https://b4mart.com//api/create_order');
+      const {data} = await Axios.get('http://localhost:4000/api/create_order');
       console.log(data);
   
       // Initialize Razorpay Payment
