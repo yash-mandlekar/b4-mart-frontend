@@ -5,28 +5,27 @@ import CartBox from "./CartBox";
 import { useSelector } from "react-redux";
 import Axios from "../../Axios";
 import { notify } from "../common/Toast";
-// import Notify from "../common/Notification"
+
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [counter, setcounter] = useState(0);
   const [total, settotal] = useState(0);
   const { cart } = useSelector((state) => state.user);
+  const [paymentMethod, setPaymentMethod] = useState("UPI"); // Add a state for payment method
+
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
   const [formData, setFormData] = useState({
-    fullName: "Yash",
-    contactNo: "9826818996",
     pincode: "462022",
-    houseDetails: "Flat 901,palash parisar",
-    areaDetails: "near sage university",
+    house_no: "Flat 901,palash parisar",
+    area: "near sage university",
     landmark: "Highway",
-    townCity: "rau,indore",
+    city: "rau,indore",
     defaultAddress: false,
   });
 
-  // Handle form field changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevState) => ({
@@ -35,53 +34,59 @@ const Cart = () => {
     }));
   };
 
-  // Handle form submission
-  // Handle form submission
+  const handlePaymentMethodChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Form Data Submitted:", formData);
-  
-    try {
-      // Get order details from the server
-      const {data} = await Axios.get('http://localhost:4000/api/create_order');
-      console.log(data);
-  
-      // Initialize Razorpay Payment
-      const options = {
-        key: 'rzp_test_LQzqvbK2cWMGRg', // Replace with your Razorpay Key ID
-        amount: data?.amount * 100, // Convert to paise
-        currency: 'INR',
-        name: 'B4 Mart',
-        description: 'Test Transaction',
-        order_id: data?.id,
-        // image: "/static/media/B4mart.3c7b651ef058639fabff.png",
-        image: "https://b4mart.com/static/media/B4mart.3c7b651ef058639fabff.png",
-        handler: function (response) {
-          notify(`Payment Successful`);
-        },
-        prefill: {
-          name: formData.fullName,
-          contact: formData.contactNo,
-          email: 'test@example.com', // Optional
-        },
-        theme: {
-          color: '#3399cc',
-        },
-      };
-  
-      // Open Razorpay Checkout
-      const rzp = new window.Razorpay(options);
-      rzp.open(); // Open without arguments
-  
-    } catch (error) {
-      console.error("Payment failed:", error);
-      alert("Payment failed. Please try again.");
+
+    if (paymentMethod === "COD") {
+      try {
+        await Axios.post("/create_order", {
+          ...formData,
+          paymentMethod: "COD",
+        });
+        notify("Order placed successfully. Cash on delivery.");
+      } catch (error) {
+        console.error("Error placing COD order:", error);
+        alert("Order placement failed. Please try again.");
+      }
+    } else {
+      try {
+        const { data } = await Axios.get("/payment_gateway");
+        const options = {
+          key: "rzp_test_LQzqvbK2cWMGRg", // Replace with your Razorpay Key ID
+          amount: data?.amount * 100, // Convert to paise
+          currency: "INR",
+          name: "B4 Mart",
+          description: "Test Transaction",
+          order_id: data?.id,
+          image:
+            "https://b4mart.com/static/media/B4mart.3c7b651ef058639fabff.png",
+          handler: async function (response) {
+            notify(`Payment Successful`);
+            await Axios.post("/create_order", {
+              ...formData,
+              paymentMethod: "UPI",
+            });
+          },
+          prefill: {
+            email: "test@example.com", // Optional
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } catch (error) {
+        console.error("Payment failed:", error);
+        alert("Payment failed. Please try again.");
+      }
     }
   };
-  
-
-
-  
 
   useEffect(() => {
     var count = 0;
@@ -108,8 +113,6 @@ const Cart = () => {
           <div className="billContainer">
             <h1>Bill Details</h1>
             <p>Total Items : {counter}</p>
-            {/* <p>Delivery Charge : 0</p> */}
-            {/* <p>Handling Charge : ₹2</p> */}
             <div className="payrap">
               <h2>
                 Grand total(1 item) : <span>₹ {total}</span>
@@ -130,28 +133,50 @@ const Cart = () => {
                     <div className="address-form-container">
                       <h2 className="address-form__title">Add New Address</h2>
                       <form className="address-form" onSubmit={handleSubmit}>
-                        {/* Full Name */}
-                        <label className="address-form__label">Full Name</label>
+                        {/* House Details */}
+                        <label className="address-form__label">
+                          Flat, House no., Building, Company, Apartment
+                        </label>
                         <input
                           type="text"
-                          name="fullName"
-                          value={formData.fullName}
+                          name="house_no"
+                          value={formData.house_no}
                           onChange={handleChange}
                           className="address-form__input"
                           required
                         />
 
-                        {/* Contact No */}
+                        {/* Area Details */}
                         <label className="address-form__label">
-                          Contact Number
+                          Area, Street, Sector, Village
                         </label>
                         <input
-                          type="tel"
-                          name="contactNo"
-                          value={formData.contactNo}
+                          type="text"
+                          name="area"
+                          value={formData.area}
                           onChange={handleChange}
                           className="address-form__input"
-                          pattern="[0-9]{10}"
+                          required
+                        />
+
+                        {/* Landmark */}
+                        <label className="address-form__label">Landmark</label>
+                        <input
+                          type="text"
+                          name="landmark"
+                          className="address-form__input"
+                          value={formData.landmark}
+                          onChange={handleChange}
+                        />
+
+                        {/* Town/City */}
+                        <label className="address-form__label">Town/City</label>
+                        <input
+                          type="text"
+                          name="city"
+                          value={formData.city}
+                          onChange={handleChange}
+                          className="address-form__input"
                           required
                         />
 
@@ -167,62 +192,26 @@ const Cart = () => {
                           required
                         />
 
-                        {/* House Details */}
-                        <label className="address-form__label">
-                          Flat, House no., Building, Company, Apartment
-                        </label>
-                        <input
-                          type="text"
-                          name="houseDetails"
-                          value={formData.houseDetails}
-                          onChange={handleChange}
-                          className="address-form__input"
-                          required
-                        />
-
-                        {/* Area Details */}
-                        <label className="address-form__label">
-                          Area, Street, Sector, Village
-                        </label>
-                        <input
-                          type="text"
-                          name="areaDetails"
-                          value={formData.areaDetails}
-                          onChange={handleChange}
-                          className="address-form__input"
-                          required
-                        />
-
-                        {/* Landmark */}
-                        <label className="address-form__label">Landmark</label>
-                        <input
-                          type="text"
-                          name="landmark"
-                          value={formData.landmark}
-                          onChange={handleChange}
-                          className="address-form__input"
-                        />
-
-                        {/* Town/City */}
-                        <label className="address-form__label">Town/City</label>
-                        <input
-                          type="text"
-                          name="townCity"
-                          value={formData.townCity}
-                          onChange={handleChange}
-                          className="address-form__input"
-                          required
-                        />
-
-                        {/* Checkbox for Default Address */}
-                        <div className="address-form__checkbox">
-                          <input
-                            type="checkbox"
-                            name="defaultAddress"
-                            checked={formData.defaultAddress}
-                            onChange={handleChange}
-                          />
-                          <label>Make this my default address</label>
+                        {/* Payment Method Selection */}
+                        <div className="payment-method">
+                          <label>
+                            <input
+                              type="radio"
+                              value="UPI"
+                              checked={paymentMethod === "UPI"}
+                              onChange={handlePaymentMethodChange}
+                            />
+                            UPI
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="COD"
+                              checked={paymentMethod === "COD"}
+                              onChange={handlePaymentMethodChange}
+                            />
+                            Cash on Delivery
+                          </label>
                         </div>
 
                         {/* Submit Button */}

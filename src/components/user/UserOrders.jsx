@@ -62,7 +62,6 @@ const UserOrders = () => {
             <h2>{order.productName}</h2>
             <p>Price: {order.price}</p>
             <p>Status: <strong>{order.status}</strong></p>
-            <p>Estimated Delivery: {order.deliveryDate}</p>
             <button className="track-button">Cancel Order</button>
           </div>
         </div>

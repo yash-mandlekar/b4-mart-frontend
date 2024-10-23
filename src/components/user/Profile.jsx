@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import "../../Css/UserProfile.css"
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const { user } = useSelector(state=>state.user)
+  console.log(user);
+  
   return (
     <div className='userprofile'>
      
@@ -14,8 +18,8 @@ const Profile = () => {
             alt="User"
             className="profile-edit-image"
           />
-          <h3 className="profile-edit-username">Yash Mandlekar</h3>
-          <p className="profile-edit-email">yash@mail.com</p>
+          <h3 className="profile-edit-username">{user?.username}</h3>
+          <p className="profile-edit-email">{user?.contact}</p>
         </div>
         <div className="profile-edit-menu">
           <button className="profile-edit-menu-button">Your Orders</button>
@@ -29,31 +33,23 @@ const Profile = () => {
         <form>
           <div className="profile-edit-form-group">
             <label>First Name</label>
-            <input type="text" placeholder="First Name" />
+            <input defaultValue={user?.username} type="text" placeholder="First Name" />
           </div>
           <div className="profile-edit-form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Last Name" />
+            <label>House No.</label>
+            <input defaultValue={user?.house_no} type="text" placeholder="House No." />
           </div>
           <div className="profile-edit-form-group">
-            <label>Contact Number</label>
-            <input type="text" placeholder="Phone Number" />
+            <label>Area</label>
+            <input defaultValue={user?.area} type="text" placeholder="Area" />
           </div>
           <div className="profile-edit-form-group">
-            <label>Address Line 1</label>
-            <input type="text" placeholder="Address Line 1" />
-          </div>
-          <div className="profile-edit-form-group">
-            <label>Address Line 2</label>
-            <input type="text" placeholder="Address Line 2" />
+            <label>City/Town</label>
+            <input defaultValue={user?.city} type="text" placeholder="State/Region" />
           </div>
           <div className="profile-edit-form-group">
             <label>Pincode</label>
-            <input type="text" placeholder="Pincode" />
-          </div>
-          <div className="profile-edit-form-group">
-            <label>State/Region</label>
-            <input type="text" placeholder="State/Region" />
+            <input defaultValue={user?.pincode} type="text" placeholder="Pincode" />
           </div>
           <div className="profile-edit-form-group">
             <button type="submit" className="profile-edit-save-button">
