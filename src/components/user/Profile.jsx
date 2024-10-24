@@ -110,10 +110,10 @@ const Profile = () => {
           <h2>Profile Settings</h2>
           <form onSubmit={handleSubmit}>
             <div className="profile-edit-form-group">
-              <label>First Name</label>
+              <label>Username</label>
               <input
                 type="text"
-                placeholder="First Name"
+                placeholder="Username"
                 defaultValue={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
