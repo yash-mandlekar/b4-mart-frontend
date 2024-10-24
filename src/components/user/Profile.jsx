@@ -57,7 +57,7 @@ const Profile = () => {
               alt="User"
               className="profile-edit-image"
             />
-            <h3 className="profile-edit-username">{user?.username}</h3>
+            <h3 className="profile-edit-username">{username}</h3>
             <p className="profile-edit-email">{user?.contact}</p>
           </div>
           <div className="profile-edit-menu">
@@ -76,28 +76,28 @@ const Profile = () => {
           <form onSubmit={handleSubmit}>
             <div className="profile-edit-form-group">
               <label>First Name</label>
-              <input type="text" placeholder="First Name" value={username}
+              <input type="text" placeholder="First Name" defaultValue={username}
               onChange={(e) => setUsername(e.target.value)} />
             </div>
             <div className="profile-edit-form-group">
               <label>House No.</label>
-              <input type="text" placeholder="House No." value={house_no} 
+              <input type="text" placeholder="House No." defaultValue={house_no} 
                 onChange={(e) => setHouse_no(e.target.value)}
               />
             </div>
             <div className="profile-edit-form-group">
               <label>Area</label>
-              <input type="text" placeholder="Area" value={area} 
+              <input type="text" placeholder="Area" defaultValue={area} 
               onChange={(e) => setArea(e.target.value)} />
             </div>
             <div className="profile-edit-form-group">
               <label>City/Town</label>
-              <input type="text" placeholder="State/Region" value={city}
+              <input type="text" placeholder="State/Region" defaultValue={city}
               onChange={(e) => setCity(e.target.value)} />
             </div>
             <div className="profile-edit-form-group">
               <label>Pincode</label>
-              <input type="text" placeholder="Pincode" value={pincode} 
+              <input type="text" placeholder="Pincode" defaultValue={pincode} 
                 onChange={(e) => setPincode(e.target.value)}
               />
             </div>
