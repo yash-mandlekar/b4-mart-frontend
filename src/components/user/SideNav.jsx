@@ -17,8 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 const SideNav = () => {
   const Dispatch = useDispatch();
   const [counter, setcounter] = useState(0);
-  const { cart } = useSelector((state) => state.user);
- 
+  const { cart, user } = useSelector((state) => state.user);
+
   useEffect(() => {
     var count = 0;
     cart.map((e) => {
@@ -44,11 +44,11 @@ const SideNav = () => {
           >
             <img src={Vector} alt="" />
           </NavLink>
-         
-          <NavLink to={"/home/orders"} >
+
+          <NavLink to={"/home/orders"}>
             <img src={Notification} alt="" />
           </NavLink>
-          
+
           <Link>
             <img src={search} alt="" />
           </Link>
@@ -70,10 +70,7 @@ const SideNav = () => {
             <img src={Logout} alt="" />
           </button>
           <Link to="/home/profile" className="profile">
-            <img
-              src="https://images.unsplash.com/photo-1629364964671-053e86d40e63?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+            <img src={user?.profilepic} alt="" />
           </Link>
         </div>
       </div>

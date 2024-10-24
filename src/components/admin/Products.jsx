@@ -34,7 +34,6 @@ const Products = () => {
     quantity_type,
     discount,
   } = form;
-  console.log(products);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

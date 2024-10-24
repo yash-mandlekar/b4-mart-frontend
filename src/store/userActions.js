@@ -15,6 +15,7 @@ import {
   setsingleshop_products,
   updatecart,
   updateorders,
+  updateprofile,
 } from "./UserSlice";
 import Axios from "../Axios";
 import { notify } from "../components/common/Toast";
@@ -175,6 +176,16 @@ export const asyncupdateorders = () => async (dispatch) => {
     const { data } = await Axios.get(`/user_order`);
     console.log(data.orders);
     dispatch(updateorders(data.orders));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+export const asyncupdateprofile = (url) => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.post(`/update_profile`, { url });
+    dispatch(updateprofile(data.user.profilepic));
     dispatch(setloadingfalse());
   } catch (err) {
     dispatch(errors(err?.response?.data?.message));

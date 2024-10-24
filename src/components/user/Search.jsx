@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../Css/Home.css";
 import Logo from "../common/Logo";
 import Notification from "../../assets/notification.svg";
 import Logout from "../../assets/logout.svg";
-import cart from "../../assets/cart.svg";
-import { useDispatch } from "react-redux";
+import cartlogo from "../../assets/cart.svg";
+import { useDispatch, useSelector } from "react-redux";
 import { asynclogout } from "../../store/userActions";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Search = () => {
   const Dispatch = useDispatch();
+  const [counter, setcounter] = useState(0);
+  const { cart, user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    var count = 0;
+    cart.map((e) => {
+      count += e.count;
+    });
+    setcounter(count);
+  }, [cart]);
   const handleLogout = async () => {
     if (window.confirm("Are you really want to logout?")) {
       Dispatch(asynclogout());
@@ -23,19 +33,24 @@ const Search = () => {
           <button onClick={handleLogout} className="logout">
             <img className="top-nav-img" src={Logout} alt="" />
           </button>
-          <div className="top-nav-item" activeclassname="active">
+          <NavLink
+            to="/home/orders"
+            className="top-nav-item"
+            activeclassname="active"
+          >
             <img className="top-nav-img" src={Notification} alt="" />
-          </div>
-          <NavLink to="cart" id="cartOption" className="top-nav-item" activeclassname="active">
-          <div className="circ">1</div>
-            <img className="top-nav-img" src={cart} alt="" />
+          </NavLink>
+          <NavLink
+            to="cart"
+            id="cartOption"
+            className="top-nav-item"
+            activeclassname="active"
+          >
+            {counter > 0 && <div className="circ">{counter}</div>}
+            <img className="top-nav-img" src={cartlogo} alt="" />
           </NavLink>
           <Link to="/home/profile" className="top-nav-profile-cnt">
-            <img
-              className="top-nav-profile"
-              src="https://images.unsplash.com/photo-1629364964671-053e86d40e63?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+            <img className="top-nav-profile" src={user?.profilepic} alt="" />
           </Link>
         </div>
       </div>

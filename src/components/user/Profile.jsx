@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import "../../Css/UserProfile.css";
-import { useSelector } from 'react-redux';
-import Axios from '../../Axios';
-import {Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Axios from "../../Axios";
+import { Link } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase-config";
+import { notify } from "../common/Toast";
+import { asyncupdateprofile } from "../../store/userActions";
 
 const Profile = () => {
-  const { user } = useSelector(state => state.user);
-  console.log(user);
-
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const fileref = useRef(null);
   // Use state for form inputs, initialized with existing user data
   const [username, setUsername] = useState(user?.username || "");
   const [house_no, setHouse_no] = useState(user?.house_no || "");
   const [area, setArea] = useState(user?.area || "");
   const [city, setCity] = useState(user?.city || "");
   const [pincode, setPincode] = useState(user?.pincode || "");
+  const [url, seturl] = useState(null);
 
   // Update state when user changes
   useEffect(() => {
@@ -25,48 +30,76 @@ const Profile = () => {
       setPincode(user.pincode);
     }
   }, [user]);
+  useEffect(() => {
+    if (url) {
+      dispatch(asyncupdateprofile(url));
+    }
+  }, [url]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userSchema = { 
-        username: username, 
-        house_no: house_no, 
-        area: area, 
-        city: city,
-        pincode: pincode,
+    const userSchema = {
+      username: username,
+      house_no: house_no,
+      area: area,
+      city: city,
+      pincode: pincode,
     };
-
     // Send POST request to the server
-    Axios.put('/profileupdate', userSchema)
-        .then(response => {
-            console.log(response.data); 
-        })
-        .catch(error => {
-            console.error("There was an error updating the profile!", error);
-        });
-};
-  
+    Axios.put("/profileupdate", userSchema)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error updating the profile!", error);
+      });
+  };
+  const uploadFile = async (event) => {
+    if (!event.target.files[0]) return;
+    if (
+      !["jpg", "jpeg", "png"].includes(event.target.files[0].type.split("/")[1])
+    )
+      return notify("image type is not valid");
+
+    try {
+      notify("Uploading...");
+      const imageRef = ref(storage, `users/${event.target.files[0].name}`);
+      await uploadBytes(imageRef, event.target.files[0]);
+      const url = await getDownloadURL(imageRef);
+      seturl(url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
-    <div className='userprofile'>
+    <div className="userprofile">
       <div className="profile-edit-container">
         {/* Left Sidebar */}
         <div className="profile-edit-sidebar">
           <div className="profile-edit-details">
             <img
-              src="https://imgs.search.brave.com/D1Qf4rHF1g9nW99i8wwb75woKfvdg5LMRwv2fual0t8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvZGVh/ZHBvb2wtbW92aWUt/bG9va2luZy1iZWhp/bmQteWpkM2pseWo2/MzA1cTlycy5qcGc"
+              src={url ? url : user?.profilepic}
               alt="User"
               className="profile-edit-image"
+              onClick={() => fileref.current.click()}
             />
+            <input
+              className="profile-pic-input"
+              ref={fileref}
+              type="file"
+              onChange={uploadFile}
+            />
+
             <h3 className="profile-edit-username">{username}</h3>
             <p className="profile-edit-email">{user?.contact}</p>
           </div>
           <div className="profile-edit-menu">
-          <Link to={"/home/orders"} >
-          <button className="profile-edit-menu-button" >Your Orders</button>
-          </Link>
-          <Link to={"/home/cart"} >
-          <button className="profile-edit-menu-button">Your Cart</button>          
-          </Link>
+            <Link to={"/home/orders"}>
+              <button className="profile-edit-menu-button">Your Orders</button>
+            </Link>
+            <Link to={"/home/cart"}>
+              <button className="profile-edit-menu-button">Your Cart</button>
+            </Link>
           </div>
         </div>
 
@@ -76,28 +109,46 @@ const Profile = () => {
           <form onSubmit={handleSubmit}>
             <div className="profile-edit-form-group">
               <label>First Name</label>
-              <input type="text" placeholder="First Name" defaultValue={username}
-              onChange={(e) => setUsername(e.target.value)} />
+              <input
+                type="text"
+                placeholder="First Name"
+                defaultValue={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="profile-edit-form-group">
               <label>House No.</label>
-              <input type="text" placeholder="House No." defaultValue={house_no} 
+              <input
+                type="text"
+                placeholder="House No."
+                defaultValue={house_no}
                 onChange={(e) => setHouse_no(e.target.value)}
               />
             </div>
             <div className="profile-edit-form-group">
               <label>Area</label>
-              <input type="text" placeholder="Area" defaultValue={area} 
-              onChange={(e) => setArea(e.target.value)} />
+              <input
+                type="text"
+                placeholder="Area"
+                defaultValue={area}
+                onChange={(e) => setArea(e.target.value)}
+              />
             </div>
             <div className="profile-edit-form-group">
               <label>City/Town</label>
-              <input type="text" placeholder="State/Region" defaultValue={city}
-              onChange={(e) => setCity(e.target.value)} />
+              <input
+                type="text"
+                placeholder="State/Region"
+                defaultValue={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
             </div>
             <div className="profile-edit-form-group">
               <label>Pincode</label>
-              <input type="text" placeholder="Pincode" defaultValue={pincode} 
+              <input
+                type="text"
+                placeholder="Pincode"
+                defaultValue={pincode}
                 onChange={(e) => setPincode(e.target.value)}
               />
             </div>
@@ -111,6 +162,6 @@ const Profile = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;

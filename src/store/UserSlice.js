@@ -65,6 +65,9 @@ export const userSlice = createSlice({
     updateorders: (state, action) => {
       state.orders = action.payload;
     },
+    updateprofile: (state, action) => {
+      state.user.profilepic = action.payload;
+    },
     errors: (state, action) => {
       state.error = action.payload;
       state.loading = false;
@@ -96,7 +99,8 @@ export const {
   createproduct,
   setsingleshop_products,
   updatecart,
-  updateorders
+  updateorders,
+  updateprofile,
 } = userSlice.actions;
 
 export default userSlice.reducer;
