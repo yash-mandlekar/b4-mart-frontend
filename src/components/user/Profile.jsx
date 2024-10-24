@@ -18,6 +18,8 @@ const Profile = () => {
   const [area, setArea] = useState(user?.area || "");
   const [city, setCity] = useState(user?.city || "");
   const [pincode, setPincode] = useState(user?.pincode || "");
+  const [landmark, setLandmark] = useState(user?.landmark || "");
+
   const [url, seturl] = useState(null);
 
   // Update state when user changes
@@ -28,6 +30,7 @@ const Profile = () => {
       setArea(user.area);
       setCity(user.city);
       setPincode(user.pincode);
+      setLandmark(user.landmark);
     }
   }, [user]);
   useEffect(() => {
@@ -44,6 +47,7 @@ const Profile = () => {
       area: area,
       city: city,
       pincode: pincode,
+      landmark:landmark,
     };
     // Send POST request to the server
     Axios.put("/profileupdate", userSchema)
@@ -134,6 +138,15 @@ const Profile = () => {
                 placeholder="Area"
                 defaultValue={area}
                 onChange={(e) => setArea(e.target.value)}
+              />
+            </div>
+            <div className="profile-edit-form-group">
+              <label>Landmark</label>
+              <input
+                type="text"
+                placeholder="Area"
+                defaultValue={landmark}
+                onChange={(e) => setLandmark(e.target.value)}
               />
             </div>
             <div className="profile-edit-form-group">
