@@ -1,0 +1,163 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
+    background-color: #e8f0fe;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Admin Profile Container */
+  .admin-profile-container {
+    max-width: 800px;
+    margin: 60px auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+  }
+  
+  /* Admin Header Section */
+  .admin-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .admin-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 6px solid #edf2f7;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .admin-avatar:hover {
+    transform: scale(1.05);
+  }
+  
+  .admin-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #333;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  
+  .admin-role {
+    font-size: 18px;
+    font-weight: 500;
+    color: #6a7280;
+    margin-top: 5px;
+  }
+  
+  /* Admin Details Section */
+  .admin-details {
+    margin-top: 40px;
+    padding: 25px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #d1d8e4, #edf2f7);
+  }
+  
+  .admin-details h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #4a5568;
+    letter-spacing: 1px;
+  }
+  
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .info-box p {
+    font-size: 18px;
+    color: #4a5568;
+  }
+  
+  .info-box p strong {
+    color: #2d3748;
+    font-weight: 600;
+  }
+  
+  .info-box p:hover {
+    background-color: #e2e8f0;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Buttons */
+  button {
+    background-color: #3182ce;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2b6cb0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-profile-container {
+      width: 95%;
+      padding: 20px;
+    }
+  
+    h1 {
+      font-size: 28px;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    .info-box p {
+      font-size: 16px;
+    }
+  
+    .admin-avatar {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .admin-profile-container {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .admin-avatar {
+      width: 120px;
+      height: 120px;
+    }
+  
+    h1 {
+      font-size: 24px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    .info-box p {
+      font-size: 14px;
+    }
+  }
+  
