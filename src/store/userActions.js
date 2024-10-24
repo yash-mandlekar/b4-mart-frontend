@@ -14,6 +14,7 @@ import {
   createproduct,
   setsingleshop_products,
   updatecart,
+  updateorders,
 } from "./UserSlice";
 import Axios from "../Axios";
 import { notify } from "../components/common/Toast";
@@ -24,7 +25,7 @@ export const asyncloaduser = () => async (dispatch) => {
     const { data } = await Axios.get("/me");
     if (data.success) {
       dispatch(loaduser(data.user));
-      dispatch(updatecart(data.user.cart))
+      dispatch(updatecart(data.user.cart));
     }
     dispatch(setpageloadingfalse());
   } catch (err) {
@@ -141,8 +142,6 @@ export const asyncaddcart = (id) => async (dispatch) => {
   try {
     dispatch(setloading());
     const { data } = await Axios.post(`/add_cart/${id}`);
-    console.log(data);
-    
     dispatch(updatecart(data.cart));
     dispatch(setloadingfalse());
   } catch (err) {
@@ -154,6 +153,28 @@ export const asyncremovecart = (id) => async (dispatch) => {
     dispatch(setloading());
     const { data } = await Axios.post(`/remove_cart/${id}`);
     dispatch(updatecart(data.cart));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+export const asyncclearcart = () => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.get(`/user_order`);
+    dispatch(updateorders(data.orders));
+    dispatch(updatecart([]));
+    dispatch(setloadingfalse());
+  } catch (err) {
+    dispatch(errors(err?.response?.data?.message));
+  }
+};
+export const asyncupdateorders = () => async (dispatch) => {
+  try {
+    dispatch(setloading());
+    const { data } = await Axios.get(`/user_order`);
+    console.log(data.orders);
+    dispatch(updateorders(data.orders));
     dispatch(setloadingfalse());
   } catch (err) {
     dispatch(errors(err?.response?.data?.message));

@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { asyncaddcart, asyncremovecart } from "../../store/userActions";
 
 const CartBox = ({ data }) => {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(data.count);
   const { product } = data;
 
-  const increaseQuantity = () => {
+  const increaseQuantity = (id) => {
+    dispatch(asyncaddcart(id));
+
     setQuantity((prev) => prev + 1);
   };
 
-  const decreaseQuantity = () => {
+  const decreaseQuantity = (id) => {
+    dispatch(asyncremovecart(id));
+
     setQuantity((prev) => (prev > 1 ? prev - 1 : 0));
   };
   return (
@@ -19,8 +26,8 @@ const CartBox = ({ data }) => {
           <img src={product?.productpic[0]} alt="" />
         </div>
         <div className="shoopingDetails">
-          <h3>{product.product_name}</h3>
-          <p>{product.quantity}</p>
+          <h3>{product?.product_name}</h3>
+          <p>{product?.quantity}</p>
           <span>In Stock</span>
           <p>
             <b>About this item:</b> {product?.description}
@@ -31,48 +38,61 @@ const CartBox = ({ data }) => {
             provided, if applicable.
           </p>
           {/* <Link>Delete this item</Link> */}
-          <button type="button2" className="button">
-            {
-              <div className="button__content">
-                <span className="button__icon" onClick={decreaseQuantity}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    stroke="currentColor"
-                    height="24"
-                    fill="none"
-                    className="svg"
+          <button type="button" className="button">
+                {quantity === 0 ? (
+                  <span
+                    className="button__text"
+                    onClick={() => increaseQuantity(product?._id)}
                   >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </span>
-                <span className="button__text tulu">{quantity}</span>
-                <span className="button__icon" onClick={increaseQuantity}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    stroke="currentColor"
-                    height="24"
-                    fill="none"
-                    className="svg"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </span>
-              </div>
-            }
-          </button>
+                    Add Item
+                  </span>
+                ) : (
+                  <div className="button__content">
+                    <span
+                      className="button__icon"
+                      onClick={() => decreaseQuantity(product?._id)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        stroke="currentColor"
+                        height="24"
+                        fill="none"
+                        className="svg"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                    </span>
+                    <span className="button__text">{quantity}</span>
+                    <span
+                      className="button__icon"
+                      onClick={() => increaseQuantity(product?._id)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        stroke="currentColor"
+                        height="24"
+                        fill="none"
+                        className="svg"
+                      >
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                    </span>
+                  </div>
+                )}
+              </button>
         </div>
-        <div className="productPrice">₹{product.price}</div>
+        <div className="productPrice">₹{product?.price}</div>
       </div>
       <div className="line"></div>
     </div>
