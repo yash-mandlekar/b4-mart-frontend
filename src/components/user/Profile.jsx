@@ -48,7 +48,9 @@ const Profile = () => {
     // Send POST request to the server
     Axios.put("/profileupdate", userSchema)
       .then((response) => {
-        console.log(response.data);
+        if(response.data.user){
+          notify("Profile Updated")
+        }
       })
       .catch((error) => {
         console.error("There was an error updating the profile!", error);

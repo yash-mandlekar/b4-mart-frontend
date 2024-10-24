@@ -12,7 +12,7 @@ const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [counter, setcounter] = useState(0);
   const [total, settotal] = useState(0);
-  const { cart } = useSelector((state) => state.user);
+  const { cart, user } = useSelector((state) => state.user);
   const [paymentMethod, setPaymentMethod] = useState("UPI");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,11 +21,11 @@ const Cart = () => {
   };
 
   const [formData, setFormData] = useState({
-    pincode: "462022",
-    house_no: "Flat 901,palash parisar",
-    area: "near sage university",
-    landmark: "Highway",
-    city: "rau,indore",
+    pincode: user?.pincode,
+    house_no: user?.house_no,
+    area: user?.area,
+    landmark: user?.landmark,
+    city: user?.city,
     defaultAddress: false,
   });
 
